@@ -4,14 +4,19 @@ import android.app.DatePickerDialog
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.View
 import android.widget.*
 import com.esteban.rentcar.model.Car
 import kotlinx.android.synthetic.main.activity_main.*
 import com.esteban.rentcar.Adapter.*
-import com.esteban.rentcar.R.id.gone
+import com.esteban.rentcar.services.IRentyApi
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     var calendar : Calendar = Calendar.getInstance()
     var btnDateCurrent: Int = 1
     var showPanel: Boolean = true
+    private var disposable: Disposable ?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,6 +83,42 @@ class MainActivity : AppCompatActivity() {
 
         //Evento -> Search Button
         search_button.setOnClickListener {
+            val rentyServe by lazy {
+                IRentyApi.create("http://andresr.pythonanywhere.com")
+            }
+
+            val rentyServe2 by lazy {
+                IRentyApi.create("http://andresr.pythonanywhere.com")
+            }
+
+            disposable = rentyServe.getCategories().subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                            {result ->
+                                var num: Int = 0
+                                for(category in result.entity) {
+                                    num++;
+                                    Log.i("Aqui fue", category.toString())
+                                }
+                            }
+                            ,
+                            {error ->
+                                Log.e("esss", error.toString())
+                            }
+                    )
+
+            disposable = rentyServe2.getStudents(5).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                            {response ->
+                                for(student  in response.entity) {
+                                    Log.i("Norr fue", student.toString())
+                                }
+                            },{ error ->
+
+                    }
+                    )
+
             var list = getList()
             my_recycler.adapter = CarAdapter(this,list)
             var text: String=""
