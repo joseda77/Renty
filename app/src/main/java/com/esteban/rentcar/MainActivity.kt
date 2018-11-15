@@ -96,8 +96,6 @@ class MainActivity : AppCompatActivity() {
                 showPanel=true
             }
         }
-
-
     }
 
 
