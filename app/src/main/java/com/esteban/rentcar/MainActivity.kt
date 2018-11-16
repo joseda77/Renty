@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity() {
 
     fun getList(): ArrayList<Car> {
         var list = ArrayList<Car>()
-        list.add(Car(1, "Type","Brand ", "model ", "price ","rental_id 1","rental_name","https://www.google.com.co/search?biw=1865&bih=981&tbm=isch&sa=1&ei=WiHvW5b7AYy0zwLhppfoCA&q=imagenes+cuadradas&oq=imagenes+cuadra&gs_l=img.3.0.0l3j0i10k1l2j0l5.3135.6986.0.7979.15.14.0.0.0.0.452.2077.0j6j2j1j1.10.0....0...1c.1.64.img..5.10.2076...35i39k1j0i67k1.0.x3m6FvpkL4E#imgrc=0RLQU38N1fWquM:"))
+        list.add(Car(1, "Type","Brand ", "model ", "price ","rental_id 1","rental_name","http://i.imgur.com/DvpvklR.png"))
         /*list.add(Car(2, "Type","Brand ", "model ", "price ","rental_id 2","rental_name"))
         list.add(Car(3, "Type","Brand ", "model ", "price ","rental_id 3","rental_name"))
         list.add(Car(4, "Type","Brand ", "model ", "price ","rental_id 4","rental_name"))

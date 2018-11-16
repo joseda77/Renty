@@ -47,7 +47,7 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
         holder.txt_rental_id.text = carList[position].rental_id
         holder.txt_rental_name.text = carList[position].rental_name
 
-        Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(holder.img_thumbnail)
+        Picasso.get().load(carList[position].thumbnail_url).into(holder.img_thumbnail)
 
 
         holder.btn_see_car.setOnClickListener({
