@@ -12,11 +12,12 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import kotlinx.android.synthetic.main.activity_oauth.*
 import android.content.Intent
+import android.util.Log
 import com.google.android.gms.auth.api.signin.GoogleSignInResult
 
 
 
-class Oauth : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener {
+class OauthGoogle : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener {
 
     private var mGoogleSignInClient: GoogleSignInClient? = null
     private val RC_SIGN_IN = 9001
@@ -32,6 +33,7 @@ class Oauth : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener {
                 .build()
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+
 
         sign_in_button.setOnClickListener{
 
@@ -71,6 +73,7 @@ class Oauth : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener {
         if(result.isSuccess) {
             // Authenticated
             val account : GoogleSignInAccount? = result.signInAccount
+            Log.i("Hola", account.toString())
             Toast.makeText(this, "Sesión iniciada", Toast.LENGTH_SHORT).show();
             goMainActivity()
         } else {

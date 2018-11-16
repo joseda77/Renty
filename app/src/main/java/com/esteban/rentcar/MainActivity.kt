@@ -10,7 +10,6 @@ import com.esteban.rentcar.Adapter.*
 import android.content.Intent
 
 
-
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +23,10 @@ class MainActivity : AppCompatActivity() {
         search_button.setOnClickListener {
 
             //**********
+
+            val intent = Intent(this,OauthGoogle::class.java)
+            startActivity(intent)
+
 
 
             var list = getList()
