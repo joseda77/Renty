@@ -1,15 +1,18 @@
 package com.esteban.rentcar
 
 import android.app.DatePickerDialog
+import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.text.InputType
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import com.esteban.rentcar.model.Car
 import kotlinx.android.synthetic.main.activity_main.*
 import com.esteban.rentcar.Adapter.*
-import com.esteban.rentcar.R.id.gone
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -82,6 +85,7 @@ class MainActivity : AppCompatActivity() {
             var text: String=""
             text = "Pick up: "+ pick_up.text.toString() + " Type: "+ type.selectedItem.toString()+ " From: " + from.text + " To: " +to.text
             Toast.makeText(this,text, Toast.LENGTH_LONG).show()
+            closeKeyBoard()
         }
 
         //Evento -> Hide-Show Panel
@@ -112,8 +116,13 @@ class MainActivity : AppCompatActivity() {
         list.add(Car(8, "Type","Brand ", "model ", "price ","rental_id 3","rental_name"))
         list.add(Car(9, "Type","Brand ", "model ", "price ","rental_id 4","rental_name"))
         list.add(Car(10, "Type","Brand ", "model ", "price ","rental_id 5","rental_name"))
-
         return list;
+    }
+
+    private fun closeKeyBoard(){
+        var view = this.currentFocus
+        val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
 

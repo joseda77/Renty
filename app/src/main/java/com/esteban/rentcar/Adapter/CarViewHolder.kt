@@ -14,6 +14,11 @@ class CarViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
     val txt_price = itemView.price
     val txt_rental_id = itemView.rental_id
     val txt_rental_name= itemView.rental_name
+    val btn_see_car = itemView.see_car_button
+    val context = itemView.getContext()
+
+
+
 
 
 }

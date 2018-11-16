@@ -1,16 +1,32 @@
 package com.esteban.rentcar.Adapter
 
 import android.content.Context
+import android.content.Intent
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Toast
+import com.esteban.rentcar.CarDetail
+import com.esteban.rentcar.MainActivity
 import com.esteban.rentcar.R
 import com.esteban.rentcar.model.Car
+import kotlinx.android.synthetic.main.car_layout.*
+import kotlinx.android.synthetic.main.car_layout.*
+import kotlinx.android.synthetic.main.activity_main.*
+
+
+
 
 class CarAdapter (internal var context: Context, internal var carList: ArrayList<Car>) : RecyclerView.Adapter<CarViewHolder>() {
 
+
+
     //para especificar el layout de nuestro listado así como componer la vista
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
+
+
         val itemView = LayoutInflater.from(parent.context)
                 .inflate(R.layout.car_layout,parent,false)
         return CarViewHolder(itemView)
@@ -30,6 +46,12 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
         holder.txt_price.text = carList[position].price
         holder.txt_rental_id.text = carList[position].rental_id
         holder.txt_rental_name.text = carList[position].rental_name
+
+        holder.btn_see_car.setOnClickListener({
+            val intent :Intent = Intent(holder.context, CarDetail::class.java)
+            holder.context.startActivity(intent)
+            Toast.makeText(holder.context,carList[position].id.toString(), Toast.LENGTH_LONG).show()
+        })
 
     }
 
