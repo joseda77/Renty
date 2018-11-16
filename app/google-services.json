@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "111111189863",
+    "firebase_url": "https://renty-404.firebaseio.com",
+    "project_id": "renty-404",
+    "storage_bucket": "renty-404.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:111111189863:android:7eb0d1628f17cee9",
+        "android_client_info": {
+          "package_name": "com.esteban.rentcar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "111111189863-hlht4oe5rlu218jjf28rj24jnvt5ki0f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.esteban.rentcar",
+            "certificate_hash": "4c773b993e020659f5efe6f0fc64d71eaf491282"
+          }
+        },
+        {
+          "client_id": "111111189863-sdin6j92g95jk80r38j8c9f7tgh8r130.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATO5hmB9JXCWgungBR9CQtGkykAhxLWZI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "111111189863-k9v1u3gugr2um40agsg24bpf3mq1ksg1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

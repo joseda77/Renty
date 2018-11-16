@@ -13,6 +13,10 @@ import com.esteban.rentcar.R.id.gone
 import java.text.SimpleDateFormat
 import java.util.*
 
+import android.content.Intent
+
+
+
 class MainActivity : AppCompatActivity() {
 
     var txtDateFrom : TextView ?=null
@@ -33,6 +37,15 @@ class MainActivity : AppCompatActivity() {
         //Inicializar el Recycler
         my_recycler.setHasFixedSize(true)
         my_recycler.layoutManager = LinearLayoutManager(this)
+
+
+        search_button.setOnClickListener {
+
+           
+
+
+            var list = getList()
+            my_recycler.adapter = CarAdapter(this,list)
 
 
         //Configuración del Spinner
