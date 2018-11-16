@@ -4,8 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,6 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CarDetail"></activity>
         <activity android:name=".OauthGoogle"></activity>
 
         <meta-data
@@ -35,7 +34,6 @@
             </intent-filter>
         </activity>
         -->
-
     </application>
 
 </manifest>
