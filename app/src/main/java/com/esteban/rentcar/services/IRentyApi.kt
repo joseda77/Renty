@@ -9,15 +9,11 @@ import retrofit2.http.Query
 
 interface IRentyApi {
 
-    @GET("/categorias")
-    fun getCategories(): Observable<CategoryResponse.Result>
-
-    @GET("/estudiantes")
-    fun getStudents(@Query("id_grupo") idGrupo: Int): Observable<StudentResponse.Result>
-
-    @GET("/cars/")
+    @GET("cars/search")
     fun getCarList(@Query("from") from: String,
-                   @Query("to") to: String): Observable<ListCarsResponse.Result>
+                   @Query("to") to: String,
+                   @Query("type") type: String,
+                   @Query("pickup") pickUp: String): Observable<List<ListCarsResponse.Result>>
 
     companion object {
         fun create(url: String): IRentyApi {

@@ -28,6 +28,10 @@ class MainActivity : AppCompatActivity() {
     var showPanel: Boolean = true
     var disposable: Disposable ?= null
     var listCar : ArrayList<Car> = ArrayList()
+    var fromDate: String = ""
+    var toDate: String = ""
+    var pickUp: String = ""
+    var typeCar: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,54 +89,39 @@ class MainActivity : AppCompatActivity() {
 
         //Evento -> Search Button
         search_button.setOnClickListener {
+            pickUp = pick_up.text.toString()
+            typeCar = type.selectedItem.toString()
+            fromDate = txtDateFrom!!.text.toString()
+            toDate = txtDateTo!!.text.toString()
             val rentyServe by lazy {
-                IRentyApi.create("http://andresr.pythonanywhere.com")
+                IRentyApi.create("https://renty-heroku.herokuapp.com")
             }
 
-            val rentyServe2 by lazy {
-                IRentyApi.create("http://andresr.pythonanywhere.com")
-            }
             listCar = ArrayList()
             var progressDialog = ProgressDialog(this)
             progressDialog.setMessage("Retraiving data")
             progressDialog.setCancelable(false)
             progressDialog.show();
-            disposable = rentyServe.getCategories().subscribeOn(Schedulers.io())
+            disposable = rentyServe.getCarList(fromDate,toDate,typeCar,pickUp).
+                    subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             {
                                 response ->
-                                var num: Int = 0
-                                for(category in response.entity) {
-                                    num++;
-                                    listCar.add(Car(num,category.nombre, category.tipo.toString(),category.nombre,
-                                            category.id.toString(), category.nombre,category.tipo.toString()))
+                                Log.i("RRRResponse", response.toString())
+                                for(car in response) {
+                                    listCar.add(Car(car.id,car.type, car.brand,car.model,
+                                            car.price.toString(),car.rental.id.toString(),
+                                            car.rental.name))
                                 }
+                                refreshList()
+                                progressDialog.dismiss()
                             }
                             ,
                             {
                                 error ->
-                                Log.e("esss", error.toString())
-                            }
-                    )
-
-            disposable = rentyServe2.getStudents(5).subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                            {
-                                response ->
-                                for(student  in response.entity) {
-                                    listCar.add(Car(student.id,student.nombres, student.apellidos, student.descripcion,
-                                            student.grupoxestudiante__columna.toString(),
-                                            student.grupoxestudiante__fila.toString(),
-                                            student.sexo_biologico.toString()))
-                                }
-                                refreshList()
+                                Log.e("errrror", error.toString())
                                 progressDialog.dismiss()
-                            },
-                            {
-                                error ->
-                                Log.e("errrrrr", error.toString())
                             }
                     )
             var text: String=""
@@ -178,7 +167,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun updateDateInView() {
-        val myFormat = "dd/MM/yyyy" // mention the format you need
+        val myFormat = "yyyy-MM-dd" // mention the format you need
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         if(btnDateCurrent==1){
             txtDateFrom!!.text = sdf.format(calendar.getTime())
