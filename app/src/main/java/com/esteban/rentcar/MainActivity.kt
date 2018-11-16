@@ -116,7 +116,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
+    }
 
 
     fun getList(): ArrayList<Car> {
