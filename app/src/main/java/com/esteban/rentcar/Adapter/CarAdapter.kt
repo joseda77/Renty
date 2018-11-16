@@ -12,6 +12,7 @@ import com.esteban.rentcar.CarDetail
 import com.esteban.rentcar.MainActivity
 import com.esteban.rentcar.R
 import com.esteban.rentcar.model.Car
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.car_layout.*
 import kotlinx.android.synthetic.main.car_layout.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -42,11 +43,12 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
         holder.txt_type.text = carList[position].type
         holder.txt_brand.text = carList[position].brand
         holder.txt_model.text = carList[position].model
-
-      //  holder.img_thumbnail.setImageResource(carList[position].thumbnail)
         holder.txt_price.text = carList[position].price
         holder.txt_rental_id.text = carList[position].rental_id
         holder.txt_rental_name.text = carList[position].rental_name
+
+        Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(holder.img_thumbnail)
+
 
         holder.btn_see_car.setOnClickListener({
             val intent :Intent = Intent(holder.context, CarDetail::class.java)

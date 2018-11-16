@@ -10,7 +10,7 @@ class CarViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
     val txt_type= itemView.rating
     val txt_brand = itemView.capacity
     val txt_model = itemView.transmission
-    //val img_thumbnail = itemView.thumbnail
+    val img_thumbnail = itemView.thumbnail
     val txt_price = itemView.doors
     val txt_rental_id = itemView.color
     val txt_rental_name= itemView.rental_name
