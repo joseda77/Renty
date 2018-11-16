@@ -6,103 +6,127 @@
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
-        android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:elevation="8dp"
         app:cardCornerRadius="2dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/thumbnail"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginRight="16dp" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/thumbnail"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginRight="16dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/id_car"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/thumbnail"
+                        android:text="id_car" />
+
+                    <TextView
+                        android:id="@+id/type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/id_car"
+                        android:layout_toRightOf="@+id/thumbnail"
+                        android:text="type" />
+
+                    <TextView
+                        android:id="@+id/brand"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/type"
+                        android:layout_toRightOf="@+id/thumbnail"
+                        android:text="brand" />
+
+                    <TextView
+                        android:id="@+id/model"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/brand"
+                        android:layout_toRightOf="@+id/thumbnail"
+                        android:text="model" />
+
+                    <TextView
+                        android:id="@+id/price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/model"
+                        android:layout_toRightOf="@+id/thumbnail"
+                        android:text="price" />
+
+                    <TextView
+                        android:id="@+id/rental_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/price"
+                        android:layout_toRightOf="@+id/thumbnail"
+                        android:text="rental_id" />
+
+                    <TextView
+                        android:id="@+id/rental_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rental_id"
+                        android:layout_toRightOf="@+id/thumbnail"
+                        android:text="rental_name" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
 
                 <Button
                     android:id="@+id/see_car_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@android:color/darker_gray"
-                    android:text="See car"
-                    android:textColor="#ffffff" />
-            </LinearLayout>
+                    android:text="Car details"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/id_car"
+                <Button
+                    android:id="@+id/rent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="id_car" />
+                    android:backgroundTint="@android:color/darker_gray"
+                    android:text="Rent"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp" />
 
-                <TextView
-                    android:id="@+id/type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/id_car"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="type" />
-
-                <TextView
-                    android:id="@+id/brand"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/type"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="brand" />
-
-                <TextView
-                    android:id="@+id/model"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/brand"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="model" />
-
-                <TextView
-                    android:id="@+id/price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/model"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="price" />
-
-                <TextView
-                    android:id="@+id/rental_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/price"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="rental_id" />
-
-                <TextView
-                    android:id="@+id/rental_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/rental_id"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="rental_name" />
             </LinearLayout>
         </LinearLayout>
-
     </android.support.v7.widget.CardView>
 
 </RelativeLayout>
