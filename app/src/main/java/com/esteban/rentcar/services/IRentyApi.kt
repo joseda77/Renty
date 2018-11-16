@@ -15,6 +15,10 @@ interface IRentyApi {
     @GET("/estudiantes")
     fun getStudents(@Query("id_grupo") idGrupo: Int): Observable<StudentResponse.Result>
 
+    @GET("/cars/")
+    fun getCarList(@Query("from") from: String,
+                   @Query("to") to: String): Observable<ListCarsResponse.Result>
+
     companion object {
         fun create(url: String): IRentyApi {
             var retrofit = Retrofit.Builder()
