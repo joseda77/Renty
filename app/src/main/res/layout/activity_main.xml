@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/values_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -23,51 +24,93 @@
             android:inputType=""
             android:textSize="15sp" />
 
-        <EditText
+        <Spinner
             android:id="@+id/type"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:autofillHints=""
-            android:hint="Type"
-            android:inputType=""
-            android:textSize="15sp" />
+            android:layout_height="wrap_content" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:visibility="visible">
 
-            <EditText
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FROM:  "
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="17sp" />
+
+            <TextView
                 android:id="@+id/from"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:autofillHints=""
-                android:hint="From"
                 android:inputType="date"
-                android:textSize="15sp" />
+                android:text="dd/mm/aaaa"
+                android:textColor="@color/colorAccent"
+                android:textSize="17sp" />
 
-            <EditText
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  TO:  "
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:textSize="17sp" />
+
+            <TextView
                 android:id="@+id/to"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:autofillHints=""
-                android:hint="To"
                 android:inputType="date"
-                android:textSize="15sp" />
+                android:text="dd/mm/aaaa"
+                android:textColor="@color/colorAccent"
+                android:textSize="17sp" />
         </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/show-hide_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:backgroundTint="@color/colorAccent"
+            android:text="Hide"
+            android:textColor="#ffffff" />
 
         <Button
             android:id="@+id/search_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:background="@color/colorAccent"
+            android:backgroundTint="@color/colorAccent"
             android:text="Search"
             android:textColor="#ffffff" />
 
+
     </LinearLayout>
+
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_recycler"
