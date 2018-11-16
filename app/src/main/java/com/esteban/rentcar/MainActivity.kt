@@ -1,6 +1,7 @@
 package com.esteban.rentcar
 
 import android.app.DatePickerDialog
+import android.app.ProgressDialog
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -16,7 +17,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.math.log
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,7 +26,8 @@ class MainActivity : AppCompatActivity() {
     var calendar : Calendar = Calendar.getInstance()
     var btnDateCurrent: Int = 1
     var showPanel: Boolean = true
-    private var disposable: Disposable ?= null
+    var disposable: Disposable ?= null
+    var listCar : ArrayList<Car> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,19 +92,26 @@ class MainActivity : AppCompatActivity() {
             val rentyServe2 by lazy {
                 IRentyApi.create("http://andresr.pythonanywhere.com")
             }
-
+            listCar = ArrayList()
+            var progressDialog = ProgressDialog(this)
+            progressDialog.setMessage("Retraiving data")
+            progressDialog.setCancelable(false)
+            progressDialog.show();
             disposable = rentyServe.getCategories().subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                            {result ->
+                            {
+                                response ->
                                 var num: Int = 0
-                                for(category in result.entity) {
+                                for(category in response.entity) {
                                     num++;
-                                    Log.i("Aqui fue", category.toString())
+                                    listCar.add(Car(num,category.nombre, category.tipo.toString(),category.nombre,
+                                            category.id.toString(), category.nombre,category.tipo.toString()))
                                 }
                             }
                             ,
-                            {error ->
+                            {
+                                error ->
                                 Log.e("esss", error.toString())
                             }
                     )
@@ -110,17 +119,22 @@ class MainActivity : AppCompatActivity() {
             disposable = rentyServe2.getStudents(5).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                            {response ->
+                            {
+                                response ->
                                 for(student  in response.entity) {
-                                    Log.i("Norr fue", student.toString())
+                                    listCar.add(Car(student.id,student.nombres, student.apellidos, student.descripcion,
+                                            student.grupoxestudiante__columna.toString(),
+                                            student.grupoxestudiante__fila.toString(),
+                                            student.sexo_biologico.toString()))
                                 }
-                            },{ error ->
-
-                    }
+                                refreshList()
+                                progressDialog.dismiss()
+                            },
+                            {
+                                error ->
+                                Log.e("errrrrr", error.toString())
+                            }
                     )
-
-            var list = getList()
-            my_recycler.adapter = CarAdapter(this,list)
             var text: String=""
             text = "Pick up: "+ pick_up.text.toString() + " Type: "+ type.selectedItem.toString()+ " From: " + from.text + " To: " +to.text
             Toast.makeText(this,text, Toast.LENGTH_LONG).show()
@@ -140,11 +154,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
+    fun refreshList() {
+        my_recycler.adapter = null
+        my_recycler.adapter = CarAdapter(this,listCar)
+    }
 
     fun getList(): ArrayList<Car> {
         var list = ArrayList<Car>()
-        list.add(Car(1, "Type","Brand ", "model ", "price ","rental_id 1","rental_name"))
+        /*list.add(Car(1, "Type","Brand ", "model ", "price ","rental_id 1","rental_name"))
         list.add(Car(2, "Type","Brand ", "model ", "price ","rental_id 2","rental_name"))
         list.add(Car(3, "Type","Brand ", "model ", "price ","rental_id 3","rental_name"))
         list.add(Car(4, "Type","Brand ", "model ", "price ","rental_id 4","rental_name"))
@@ -154,7 +171,7 @@ class MainActivity : AppCompatActivity() {
         list.add(Car(8, "Type","Brand ", "model ", "price ","rental_id 3","rental_name"))
         list.add(Car(9, "Type","Brand ", "model ", "price ","rental_id 4","rental_name"))
         list.add(Car(10, "Type","Brand ", "model ", "price ","rental_id 5","rental_name"))
-
+*/
         return list;
     }
 
