@@ -2,11 +2,9 @@ package com.esteban.rentcar
 
 import android.app.DatePickerDialog
 import android.content.Context
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.text.InputType
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
@@ -94,10 +92,12 @@ class MainActivity : AppCompatActivity() {
                 values_container.visibility = View.GONE
                 show_hide_button.text = "SHOW"
                 showPanel = false
+                search_button.visibility = View.GONE
             }else{
                 values_container.visibility = View.VISIBLE
                 show_hide_button.text = "HIDE"
                 showPanel=true
+                search_button.visibility = View.VISIBLE
             }
         }
     }

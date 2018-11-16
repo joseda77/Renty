@@ -42,6 +42,7 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
         holder.txt_type.text = carList[position].type
         holder.txt_brand.text = carList[position].brand
         holder.txt_model.text = carList[position].model
+
       //  holder.img_thumbnail.setImageResource(carList[position].thumbnail)
         holder.txt_price.text = carList[position].price
         holder.txt_rental_id.text = carList[position].rental_id
