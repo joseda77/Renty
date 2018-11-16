@@ -9,9 +9,14 @@ import android.widget.*
 import com.esteban.rentcar.model.Car
 import kotlinx.android.synthetic.main.activity_main.*
 import com.esteban.rentcar.Adapter.*
+
+import android.content.Intent
+
+
 import com.esteban.rentcar.R.id.gone
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,6 +38,20 @@ class MainActivity : AppCompatActivity() {
         //Inicializar el Recycler
         my_recycler.setHasFixedSize(true)
         my_recycler.layoutManager = LinearLayoutManager(this)
+
+
+        search_button.setOnClickListener {
+
+            //Temporalmente el boton Search lleva a la activity de login
+
+            val intent = Intent(this,OauthGoogle::class.java)
+            startActivity(intent)
+
+
+
+            var list = getList()
+            my_recycler.adapter = CarAdapter(this,list)
+
 
 
         //Configuración del Spinner
