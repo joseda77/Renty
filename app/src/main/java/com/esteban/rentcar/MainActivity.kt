@@ -7,6 +7,9 @@ import android.widget.Toast
 import com.esteban.rentcar.model.Car
 import kotlinx.android.synthetic.main.activity_main.*
 import com.esteban.rentcar.Adapter.*
+import android.content.Intent
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +22,10 @@ class MainActivity : AppCompatActivity() {
         my_recycler.layoutManager = LinearLayoutManager(this)
 
         search_button.setOnClickListener {
+
+            //**********
+
+
             var list = getList()
             my_recycler.adapter = CarAdapter(this,list)
 
