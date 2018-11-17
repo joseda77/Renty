@@ -54,12 +54,12 @@ class MainActivity : AppCompatActivity() {
 
             //Temporalmente el boton Search lleva a la activity de login
 
-            val intent = Intent(this, OauthGoogle::class.java)
-            startActivity(intent)
+            /*val intent = Intent(this, OauthGoogle::class.java)
+            startActivity(intent)*/
 
 
-            var list = getList()
-            my_recycler.adapter = CarAdapter(this, list)
+            /*var list = getList()
+            my_recycler.adapter = CarAdapter(this, list)*/
 
 
             //Configuración del Spinner
