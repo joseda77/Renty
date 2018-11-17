@@ -14,6 +14,7 @@ import android.content.Intent
 
 
 import com.esteban.rentcar.R.id.gone
+import com.facebook.AccessToken
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -44,8 +45,8 @@ class MainActivity : AppCompatActivity() {
 
             //Temporalmente el boton Search lleva a la activity de login
 
-            val intent = Intent(this,OauthGoogle::class.java)
-            startActivity(intent)
+
+
 
 
 
