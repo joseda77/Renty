@@ -21,12 +21,15 @@ class CarDetail : AppCompatActivity() {
         progressDialog.setMessage("Retraiving data")
         progressDialog.setCancelable(false)
         progressDialog.show()
+        val intent = intent
+        val id = Integer.parseInt(intent.getStringExtra("idCar"))
+
 
         val rentyServe by lazy {
             IRentyApi.create("https://renty-heroku.herokuapp.com")
         }
 
-        disposable = rentyServe.getCarDetails(4).subscribeOn(Schedulers.io())
+        disposable = rentyServe.getCarDetails(id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         {

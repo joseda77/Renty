@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity() {
         txtDateFrom = from
         txtDateTo = to
 
-
         //Inicializar el Recycler
         my_recycler.setHasFixedSize(true)
         my_recycler.layoutManager = LinearLayoutManager(this)
@@ -63,7 +62,8 @@ class MainActivity : AppCompatActivity() {
 
 
             //Configuración del Spinner
-        var items_of_type = arrayOf("Car type 1", "Car type 2", "Car type 3")
+        var items_of_type = arrayOf("sport", "minivan", "hatchback", "off-road", "suv",
+                "c-suv", "coupe", "otro")
             // Crear el ArrayAdapter para el spinner
         val adapter_spinner = ArrayAdapter(this, android.R.layout.simple_spinner_item, items_of_type)
             // Configura un diseño depslegable al adpater
@@ -85,7 +85,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             //EVENTOS
-
+        refreshList()
+        updateDateInView()
             // Evento -> Click en calendarios, Mostrar DatePickerDialog que es configurado con OnDateSetListener
             txtDateFrom!!.setOnClickListener(object : View.OnClickListener {
                 override fun onClick(view: View) {

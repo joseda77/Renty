@@ -52,6 +52,7 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
 
         holder.btn_see_car.setOnClickListener({
             val intent :Intent = Intent(holder.context, CarDetail::class.java)
+            intent.putExtra("idCar",carList[position].id.toString())
             holder.context.startActivity(intent)
             Toast.makeText(holder.context,carList[position].id.toString(), Toast.LENGTH_LONG).show()
         })
