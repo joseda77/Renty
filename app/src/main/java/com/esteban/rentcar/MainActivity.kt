@@ -1,20 +1,27 @@
 package com.esteban.rentcar
 
 import android.app.DatePickerDialog
+import android.app.ProgressDialog
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import com.esteban.rentcar.model.Car
 import kotlinx.android.synthetic.main.activity_main.*
 import com.esteban.rentcar.Adapter.*
+import com.esteban.rentcar.services.IRentyApi
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import android.content.Intent
 import com.esteban.rentcar.R.id.gone
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,6 +31,12 @@ class MainActivity : AppCompatActivity() {
     var calendar : Calendar = Calendar.getInstance()
     var btnDateCurrent: Int = 1
     var showPanel: Boolean = true
+    var disposable: Disposable ?= null
+    var listCar : ArrayList<Car> = ArrayList()
+    var fromDate: String = ""
+    var toDate: String = ""
+    var pickUp: String = ""
+    var typeCar: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,8 +108,41 @@ class MainActivity : AppCompatActivity() {
 
         //Evento -> Search Button
         search_button.setOnClickListener {
-            var list = getList()
-            my_recycler.adapter = CarAdapter(this,list)
+            pickUp = pick_up.text.toString()
+            typeCar = type.selectedItem.toString()
+            fromDate = txtDateFrom!!.text.toString()
+            toDate = txtDateTo!!.text.toString()
+            val rentyServe by lazy {
+                IRentyApi.create("https://renty-heroku.herokuapp.com")
+            }
+
+            listCar = ArrayList()
+            var progressDialog = ProgressDialog(this)
+            progressDialog.setMessage("Retraiving data")
+            progressDialog.setCancelable(false)
+            progressDialog.show();
+            disposable = rentyServe.getCarList(fromDate,toDate,typeCar,pickUp).
+                    subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                            {
+                                response ->
+                                Log.i("RRRResponse", response.toString())
+                                for(car in response) {
+                                    listCar.add(Car(car.id,car.type, car.brand,car.model,
+                                            car.price.toString(),car.rental.id.toString(),
+                                            car.rental.name))
+                                }
+                                refreshList()
+                                progressDialog.dismiss()
+                            }
+                            ,
+                            {
+                                error ->
+                                Log.e("errrror", error.toString())
+                                progressDialog.dismiss()
+                            }
+                    )
             var text: String=""
             text = "Pick up: "+ pick_up.text.toString() + " Type: "+ type.selectedItem.toString()+ " From: " + from.text + " To: " +to.text
             Toast.makeText(this,text, Toast.LENGTH_LONG).show()
@@ -118,8 +164,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-    }
 
+    fun refreshList() {
+        my_recycler.adapter = null
+        my_recycler.adapter = CarAdapter(this,listCar)
+    }
 
     fun getList(): ArrayList<Car> {
         var list = ArrayList<Car>()
@@ -132,7 +181,8 @@ class MainActivity : AppCompatActivity() {
         list.add(Car(7, "Type","Brand ", "model ", "price ","rental_id 2","rental_name"))
         list.add(Car(8, "Type","Brand ", "model ", "price ","rental_id 3","rental_name"))
         list.add(Car(9, "Type","Brand ", "model ", "price ","rental_id 4","rental_name"))
-        list.add(Car(10, "Type","Brand ", "model ", "price ","rental_id 5","rental_name"))*/
+        list.add(Car(10, "Type","Brand ", "model ", "price ","rental_id 5","rental_name"))
+*/
         return list;
     }
 
@@ -143,7 +193,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateDateInView() {
-        val myFormat = "dd/MM/yyyy" // mention the format you need
+        val myFormat = "yyyy-MM-dd" // mention the format you need
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         if(btnDateCurrent==1){
             txtDateFrom!!.text = sdf.format(calendar.getTime())
