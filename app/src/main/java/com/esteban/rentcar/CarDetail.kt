@@ -1,6 +1,7 @@
 package com.esteban.rentcar
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -23,6 +24,11 @@ class CarDetail : AppCompatActivity() {
         progressDialog.show()
         val intent = intent
         val id = Integer.parseInt(intent.getStringExtra("idCar"))
+
+        rent.setOnClickListener {
+            val intent: Intent = Intent(this,oauth::class.java)
+            startActivity(intent)
+        }
 
 
         val rentyServe by lazy {

@@ -51,16 +51,6 @@ class MainActivity : AppCompatActivity() {
         my_recycler.layoutManager = LinearLayoutManager(this)
 
 
-            //Temporalmente el boton Search lleva a la activity de login
-
-            /*val intent = Intent(this, OauthGoogle::class.java)
-            startActivity(intent)*/
-
-
-            /*var list = getList()
-            my_recycler.adapter = CarAdapter(this, list)*/
-
-
             //Configuración del Spinner
         var items_of_type = arrayOf("sport", "minivan", "hatchback", "off-road", "suv",
                 "c-suv", "coupe", "otro")
