@@ -109,19 +109,23 @@ class MainActivity : AppCompatActivity() {
                 fromDate = txtDateFrom!!.text.toString()
                 toDate = txtDateTo!!.text.toString()
                 val rentyServe by lazy {
-                    IRentyApi.create("https://renty-heroku.herokuapp.com")
+                    IRentyApi.create("https://renty-web.herokuapp.com")
                 }
 
                 listCar = ArrayList()
+                Log.i("RRRResponse", listCar.size.toString())
                 var progressDialog = ProgressDialog(this)
                 progressDialog.setMessage("Retraiving data")
                 progressDialog.setCancelable(false)
                 progressDialog.show();
+                Log.i("RRRResponse", fromDate)
+                Log.i("RRRResponse", toDate)
+                Log.i("RRRResponse", typeCar)
+                Log.i("RRRResponse", pickUp)
                 disposable = rentyServe.getCarList(fromDate, toDate, typeCar, pickUp).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
                                 { response ->
-                                    Log.i("RRRResponse", response.toString())
                                     for (car in response) {
                                         listCar.add(Car(car.id, car.type, car.brand, car.model,
                                                 car.price.toString(), car.rental.id.toString(),
