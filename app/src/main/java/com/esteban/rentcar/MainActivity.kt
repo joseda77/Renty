@@ -2,11 +2,13 @@ package com.esteban.rentcar
 
 import android.app.DatePickerDialog
 import android.app.ProgressDialog
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import com.esteban.rentcar.model.Car
 import kotlinx.android.synthetic.main.activity_main.*
@@ -15,9 +17,12 @@ import com.esteban.rentcar.services.IRentyApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import android.content.Intent
+import com.esteban.rentcar.R.id.gone
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -45,6 +50,20 @@ class MainActivity : AppCompatActivity() {
         //Inicializar el Recycler
         my_recycler.setHasFixedSize(true)
         my_recycler.layoutManager = LinearLayoutManager(this)
+
+
+        search_button.setOnClickListener {
+
+            //Temporalmente el boton Search lleva a la activity de login
+
+            val intent = Intent(this,OauthGoogle::class.java)
+            startActivity(intent)
+
+
+
+            var list = getList()
+            my_recycler.adapter = CarAdapter(this,list)
+
 
 
         //Configuración del Spinner
@@ -127,6 +146,7 @@ class MainActivity : AppCompatActivity() {
             var text: String=""
             text = "Pick up: "+ pick_up.text.toString() + " Type: "+ type.selectedItem.toString()+ " From: " + from.text + " To: " +to.text
             Toast.makeText(this,text, Toast.LENGTH_LONG).show()
+            closeKeyBoard()
         }
 
         //Evento -> Hide-Show Panel
@@ -135,10 +155,12 @@ class MainActivity : AppCompatActivity() {
                 values_container.visibility = View.GONE
                 show_hide_button.text = "SHOW"
                 showPanel = false
+                search_button.visibility = View.GONE
             }else{
                 values_container.visibility = View.VISIBLE
                 show_hide_button.text = "HIDE"
                 showPanel=true
+                search_button.visibility = View.VISIBLE
             }
         }
     }
@@ -150,8 +172,8 @@ class MainActivity : AppCompatActivity() {
 
     fun getList(): ArrayList<Car> {
         var list = ArrayList<Car>()
-        /*list.add(Car(1, "Type","Brand ", "model ", "price ","rental_id 1","rental_name"))
-        list.add(Car(2, "Type","Brand ", "model ", "price ","rental_id 2","rental_name"))
+        list.add(Car(1, "Type","Brand ", "model ", "price ","rental_id 1","rental_name","http://i.imgur.com/DvpvklR.png"))
+        /*list.add(Car(2, "Type","Brand ", "model ", "price ","rental_id 2","rental_name"))
         list.add(Car(3, "Type","Brand ", "model ", "price ","rental_id 3","rental_name"))
         list.add(Car(4, "Type","Brand ", "model ", "price ","rental_id 4","rental_name"))
         list.add(Car(5, "Type","Brand ", "model ", "price ","rental_id 5","rental_name"))
@@ -164,7 +186,11 @@ class MainActivity : AppCompatActivity() {
         return list;
     }
 
-
+    private fun closeKeyBoard(){
+        var view = this.currentFocus
+        val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
 
     private fun updateDateInView() {
         val myFormat = "yyyy-MM-dd" // mention the format you need
