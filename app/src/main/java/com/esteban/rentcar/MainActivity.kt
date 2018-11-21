@@ -98,6 +98,8 @@ class MainActivity : AppCompatActivity() {
                 typeCar = type.selectedItem.toString()
                 fromDate = txtDateFrom!!.text.toString()
                 toDate = txtDateTo!!.text.toString()
+                /*var list = getList()
+                my_recycler.adapter = CarAdapter(this,list)*/
                 val rentyServe by lazy {
                     IRentyApi.create("https://renty-web.herokuapp.com")
                 }
@@ -130,10 +132,18 @@ class MainActivity : AppCompatActivity() {
                                     progressDialog.dismiss()
                                 }
                         )
+
                 var text: String = ""
                 text = "Pick up: " + pick_up.text.toString() + " Type: " + type.selectedItem.toString() + " From: " + from.text + " To: " + to.text
                 Toast.makeText(this, text, Toast.LENGTH_LONG).show()
                 closeKeyBoard()
+
+                //ocultar panel
+                values_container.visibility = View.GONE
+                show_hide_button.text = "SHOW"
+                showPanel = false
+                search_button.visibility = View.GONE
+
             }
 
             //Evento -> Hide-Show Panel
@@ -159,16 +169,13 @@ class MainActivity : AppCompatActivity() {
 
         fun getList(): ArrayList<Car> {
             var list = ArrayList<Car>()
-            list.add(Car(1, "Type", "Brand ", "model ", "price ", "rental_id 1", "rental_name", "http://i.imgur.com/DvpvklR.png"))
-            /*list.add(Car(2, "Type","Brand ", "model ", "price ","rental_id 2","rental_name"))
-        list.add(Car(3, "Type","Brand ", "model ", "price ","rental_id 3","rental_name"))
-        list.add(Car(4, "Type","Brand ", "model ", "price ","rental_id 4","rental_name"))
-        list.add(Car(5, "Type","Brand ", "model ", "price ","rental_id 5","rental_name"))
-        list.add(Car(6, "Type","Brand ", "model ", "price ","rental_id 1","rental_name"))
-        list.add(Car(7, "Type","Brand ", "model ", "price ","rental_id 2","rental_name"))
-        list.add(Car(8, "Type","Brand ", "model ", "price ","rental_id 3","rental_name"))
-        list.add(Car(9, "Type","Brand ", "model ", "price ","rental_id 4","rental_name"))
-        list.add(Car(10, "Type","Brand ", "model ", "price ","rental_id 5","rental_name"))
+/*
+            list.add(Car(2, "Type","Brand ", "model ", "price ","rental_id 2","rental_name", "https://i.imgur.com/IyEp7mf.jpg"))
+            list.add(Car(3, "Type","Brand ", "model ", "price ","rental_id 3","rental_name", "https://i.imgur.com/XEgyzCW.jpg"))
+            list.add(Car(4, "Type","Brand ", "model ", "price ","rental_id 4","rental_name", "https://i.imgur.com/72bQoTW.jpg"))
+            list.add(Car(5, "Type","Brand ", "model ", "price ","rental_id 5","rental_name", "https://i.imgur.com/fbPHUCn.jpg"))
+            list.add(Car(6, "Type","Brand ", "model ", "price ","rental_id 1","rental_name", "https://i.imgur.com/1wrP717.jpg"))
+
 */
             return list;
         }

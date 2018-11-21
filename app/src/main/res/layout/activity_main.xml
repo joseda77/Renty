@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/gradient">
 
     <LinearLayout
         android:id="@+id/values_container"
@@ -19,16 +20,22 @@
             android:id="@+id/pick_up"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:autoText="true"
             android:autofillHints=""
             android:hint="@string/pick_up"
             android:inputType=""
-            android:textSize="15sp" />
+            android:singleLine="false"
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/type"
             style="@style/Widget.AppCompat.Spinner.Underlined"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:outlineAmbientShadowColor="@color/colorAccent"
+            android:outlineSpotShadowColor="@color/colorAccent" />
 
 
         <LinearLayout
@@ -41,33 +48,32 @@
             android:visibility="visible">
 
             <TextView
-                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="FROM:  "
-                android:textAlignment="center"
-                android:textColor="@android:color/black"
-                android:textSize="17sp" />
+                android:text="From:  "
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/from"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginRight="25dp"
                 android:autofillHints=""
                 android:inputType="date"
                 android:text="dd/mm/aaaa"
                 android:textColor="@color/colorAccent"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="  TO:  "
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textColor="@android:color/black"
-                android:textSize="17sp" />
+                android:text="To:  "
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/to"
@@ -77,7 +83,8 @@
                 android:inputType="date"
                 android:text="dd/mm/aaaa"
                 android:textColor="@color/colorAccent"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
 

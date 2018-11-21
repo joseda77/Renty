@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -15,43 +16,46 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="vertical">
 
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:id="@+id/ImageLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="vertical">
 
+                <ImageView
+                    android:id="@+id/thumbnail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient_backgroud_card"
+                android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/SpecificsLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
+
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/thumbnail"
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentTop="true"
-                            android:layout_marginRight="16dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="top"
-                        android:orientation="vertical"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -64,7 +68,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/plate"
+                            android:id="@+id/id_car"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentTop="true"
@@ -82,12 +86,21 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/rating"
+                            android:id="@+id/type"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/plate"
                             android:layout_toRightOf="@+id/thumbnail"
                             android:text="type" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="top"
+                        android:orientation="vertical"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -100,7 +113,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/capacity"
+                            android:id="@+id/brand"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/rating"
@@ -118,7 +131,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/transmission"
+                            android:id="@+id/model"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/capacity"
@@ -147,7 +160,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/doors"
+                            android:id="@+id/price"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/transmission"
@@ -165,12 +178,23 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/color"
+                            android:id="@+id/rental_id"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/doors"
                             android:layout_toRightOf="@+id/thumbnail"
                             android:text="rental_id" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="top"
+                        android:orientation="vertical"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -193,32 +217,35 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/buttonsLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+                    <Button
+                        android:id="@+id/see_car_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:text="Car details"
+                        android:textColor="#ffffff"
+                        android:textSize="10sp" />
+
+                    <Button
+                        android:id="@+id/rent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:accessibilityHeading="false"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:text="Rent"
+                        android:textColor="#ffffff"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
-
-                <Button
-                    android:id="@+id/see_car_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorAccent"
-                    android:text="Car details"
-                    android:textColor="#ffffff"
-                    android:textSize="10sp" />
-
-                <Button
-                    android:id="@+id/rent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorAccent"
-                    android:text="Rent"
-                    android:textColor="#ffffff"
-                    android:textSize="10sp" />
-
-            </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
