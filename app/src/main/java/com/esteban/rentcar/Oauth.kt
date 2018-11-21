@@ -20,7 +20,7 @@ import com.facebook.*
 import com.facebook.login.LoginResult
 import com.google.firebase.auth.*
 
-class OauthGoogle : AppCompatActivity(),GoogleApiClient.OnConnectionFailedListener {
+class Oauth : AppCompatActivity(),GoogleApiClient.OnConnectionFailedListener {
 
    //Facebook
     var mAuth: FirebaseAuth? =null
@@ -29,7 +29,7 @@ class OauthGoogle : AppCompatActivity(),GoogleApiClient.OnConnectionFailedListen
     //Google
     private var mGoogleSignInClient: GoogleSignInClient? = null
     private val RC_SIGN_IN = 9001
-    private var flag: Int = 0
+    private var flag: Int = 0  //Controla si el metodo onActivityResult ejecuta el codigo necesario de google o Facebookgit
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,12 +78,14 @@ class OauthGoogle : AppCompatActivity(),GoogleApiClient.OnConnectionFailedListen
         }
 
     }
-    //Facebook
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if(flag ==0) {
+
+        if(flag ==0) { //Facebook
             super.onActivityResult(requestCode, resultCode, data)
             callbackManager!!.onActivityResult(requestCode, resultCode, data)
-        }else
+        }
+        else //Google
         {
             super.onActivityResult(requestCode, resultCode, data)
 

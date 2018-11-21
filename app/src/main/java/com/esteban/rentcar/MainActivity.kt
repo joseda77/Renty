@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         search_button.setOnClickListener {
 
-            //Temporalmente el boton Search lleva a la activity de login
+
 
 
 
