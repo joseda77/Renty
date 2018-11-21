@@ -16,8 +16,15 @@ interface IRentyApi {
                    @Query("type") type: String,
                    @Query("pickup") pickUp: String): Observable<List<ListCarsResponse.Result>>
 
+    /*
+    @GET("cars/search")
+    fun getCarList(@Query("from") from: String,
+                   @Query("to") to: String,
+                   @Query("type") type: String,
+                   @Query("pickup") pickUp: String): Observable<ListCarResponse.Result>*/
+
     @GET("cars/{id}/")
-    fun getCarDetails(@Path("id") id: Int): Observable<List<DetailCarResponse.Result>>
+    fun getCarDetails(@Path("id") id: Int): Observable<DetailCarResponse.Result>
 
     companion object {
         fun create(url: String): IRentyApi {

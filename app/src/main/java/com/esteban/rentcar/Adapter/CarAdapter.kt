@@ -53,15 +53,12 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
                 .into(holder.img_thumbnail)
 
 
-        holder.btn_see_car.setOnClickListener({
-            val intent1: Intent = Intent(holder.context,CarDetail::class.java)
-            holder.context.startActivity(intent1)
-          /*  val intent :Intent = Intent(holder.context, CarDetail::class.java)
+        holder.btn_see_car.setOnClickListener{
+            val intent :Intent = Intent(holder.context, CarDetail::class.java)
             intent.putExtra("idCar",carList[position].id.toString())
             holder.context.startActivity(intent)
-            Toast.makeText(holder.context,carList[position].id.toString(), Toast.LENGTH_LONG).show()*/
 
-        })
+        }
 
         holder.btn_rent_car.setOnClickListener {
             val intent: Intent = Intent(holder.context,oauth::class.java)

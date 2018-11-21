@@ -52,8 +52,7 @@ class MainActivity : AppCompatActivity() {
 
 
             //Configuración del Spinner
-        var items_of_type = arrayOf("sport", "minivan", "hatchback", "off-road", "suv",
-                "c-suv", "coupe", "otro")
+        var items_of_type = arrayOf("Económico", "Compacto", "SUV", "Lujo")
             // Crear el ArrayAdapter para el spinner
         val adapter_spinner = ArrayAdapter(this, android.R.layout.simple_spinner_item, items_of_type)
             // Configura un diseño depslegable al adpater
@@ -101,23 +100,19 @@ class MainActivity : AppCompatActivity() {
                 /*var list = getList()
                 my_recycler.adapter = CarAdapter(this,list)*/
                 val rentyServe by lazy {
-                    IRentyApi.create("https://renty-web.herokuapp.com")
+                    IRentyApi.create("https://renty-web.herokuapp.com/")
                 }
 
                 listCar = ArrayList()
-                Log.i("RRRResponse", listCar.size.toString())
                 var progressDialog = ProgressDialog(this)
                 progressDialog.setMessage("Retraiving data")
                 progressDialog.setCancelable(false)
-                progressDialog.show();
-                Log.i("RRRResponse", fromDate)
-                Log.i("RRRResponse", toDate)
-                Log.i("RRRResponse", typeCar)
-                Log.i("RRRResponse", pickUp)
+                progressDialog.show()
                 disposable = rentyServe.getCarList(fromDate, toDate, typeCar, pickUp).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
                                 { response ->
+                                    //response.cars cuando los metodos retornen lo que deban
                                     for (car in response) {
                                         listCar.add(Car(car.id, car.type, car.brand, car.model,
                                                 car.price.toString(), car.rental.id.toString(),
@@ -128,14 +123,12 @@ class MainActivity : AppCompatActivity() {
                                 }
                                 ,
                                 { error ->
-                                    Log.e("errrror", error.toString())
                                     progressDialog.dismiss()
+                                    Toast.makeText(this,
+                                            "No se encuentran vehiculos con los parametros ingresados",
+                                            Toast.LENGTH_LONG).show()
                                 }
                         )
-
-                var text: String = ""
-                text = "Pick up: " + pick_up.text.toString() + " Type: " + type.selectedItem.toString() + " From: " + from.text + " To: " + to.text
-                Toast.makeText(this, text, Toast.LENGTH_LONG).show()
                 closeKeyBoard()
 
                 //ocultar panel

@@ -422,7 +422,7 @@
                         android:id="@+id/textView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Images Car"
+                        android:text="Car Images "
                         android:textAlignment="center"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
