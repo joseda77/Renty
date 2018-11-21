@@ -5,6 +5,7 @@ import retrofit2.http.GET
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface IRentyApi {
@@ -14,6 +15,16 @@ interface IRentyApi {
                    @Query("to") to: String,
                    @Query("type") type: String,
                    @Query("pickup") pickUp: String): Observable<List<ListCarsResponse.Result>>
+
+    /*
+    @GET("cars/search")
+    fun getCarList(@Query("from") from: String,
+                   @Query("to") to: String,
+                   @Query("type") type: String,
+                   @Query("pickup") pickUp: String): Observable<ListCarResponse.Result>*/
+
+    @GET("cars/{id}/")
+    fun getCarDetails(@Path("id") id: Int): Observable<DetailCarResponse.Result>
 
     companion object {
         fun create(url: String): IRentyApi {

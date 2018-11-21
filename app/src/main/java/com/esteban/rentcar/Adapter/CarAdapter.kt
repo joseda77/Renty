@@ -12,6 +12,7 @@ import com.esteban.rentcar.CarDetail
 import com.esteban.rentcar.MainActivity
 import com.esteban.rentcar.R
 import com.esteban.rentcar.model.Car
+import com.esteban.rentcar.oauth
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.car_layout.*
 import kotlinx.android.synthetic.main.car_layout.*
@@ -47,14 +48,22 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
         holder.txt_rental_id.text = carList[position].rental_id
         holder.txt_rental_name.text = carList[position].rental_name
 
-        Picasso.get().load(carList[position].thumbnail_url).into(holder.img_thumbnail)
+
+        Picasso.get().load(carList[position].thumbnail_url).placeholder(R.drawable.ic_launcher_foreground)
+                .into(holder.img_thumbnail)
 
 
-        holder.btn_see_car.setOnClickListener({
+        holder.btn_see_car.setOnClickListener{
             val intent :Intent = Intent(holder.context, CarDetail::class.java)
+            intent.putExtra("idCar",carList[position].id.toString())
             holder.context.startActivity(intent)
-            Toast.makeText(holder.context,carList[position].id.toString(), Toast.LENGTH_LONG).show()
-        })
+
+        }
+
+        holder.btn_rent_car.setOnClickListener {
+            val intent: Intent = Intent(holder.context,oauth::class.java)
+            holder.context.startActivity(intent)
+        }
 
     }
 
