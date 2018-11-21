@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CarDetail"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/gradient">
 
 
     <ScrollView
@@ -27,6 +28,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/gradient_background_card_cardetails"
                     android:orientation="vertical">
 
 
@@ -214,6 +216,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/gradient_background_card_cardetails"
                     android:orientation="vertical">
 
 
@@ -383,7 +386,34 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/gradient_backgroud_card"
+                    android:gravity="center_horizontal">
+
+                    <Button
+                        android:id="@+id/rent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:text="Rent car"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/gradient_backgroud_card"
+                android:elevation="8dp"
+                app:cardCornerRadius="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@drawable/gradient_background_card_cardetails"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:paddingBottom="10dp">
@@ -398,37 +428,18 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <ImageView
-                        android:id="@+id/images"
-                        android:layout_width="300dp"
-                        android:layout_height="300dp"
-                        app:srcCompat="?attr/actionBarDivider" />
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:elevation="8dp"
-                app:cardCornerRadius="2dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal">
-
-                    <Button
-                        android:id="@+id/rent"
+                    <LinearLayout
+                        android:id="@+id/layout_scroll"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/colorAccent"
-                        android:text="Rent car"
-                        android:textColor="#ffffff"
-                        android:textSize="18sp" />
+                        android:gravity="center"
+                        android:orientation="vertical"></LinearLayout>
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
+
+
         </LinearLayout>
     </ScrollView>
 
