@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
 
             //Configuración del Spinner
-        var items_of_type = arrayOf("Económico", "Compacto", "SUV", "Lujo")
+        var items_of_type = arrayOf("Económico", "Compacto", "SUV", "Lujo", "sport")
             // Crear el ArrayAdapter para el spinner
         val adapter_spinner = ArrayAdapter(this, android.R.layout.simple_spinner_item, items_of_type)
             // Configura un diseño depslegable al adpater
