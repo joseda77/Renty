@@ -141,7 +141,7 @@ class MainActivity : AppCompatActivity() {
 
             //Evento -> Hide-Show Panel
             show_hide_button.setOnClickListener {
-                if (showPanel == true) {
+                /*if (showPanel == true) {
                     values_container.visibility = View.GONE
                     show_hide_button.text = "SHOW"
                     showPanel = false
@@ -151,7 +151,9 @@ class MainActivity : AppCompatActivity() {
                     show_hide_button.text = "HIDE"
                     showPanel = true
                     search_button.visibility = View.VISIBLE
-                }
+                }*/
+                var intent: Intent = Intent(this, oauth::class.java)
+                startActivity(intent);
             }
         }
 
