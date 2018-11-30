@@ -141,7 +141,7 @@ class MainActivity : AppCompatActivity() {
 
             //Evento -> Hide-Show Panel
             show_hide_button.setOnClickListener {
-                if (showPanel == true) {
+                /*if (showPanel == true) {
                     values_container.visibility = View.GONE
                     show_hide_button.text = "SHOW"
                     showPanel = false
@@ -151,7 +151,12 @@ class MainActivity : AppCompatActivity() {
                     show_hide_button.text = "HIDE"
                     showPanel = true
                     search_button.visibility = View.VISIBLE
-                }
+                }*/
+                val intent:Intent = Intent(this, ShowBookings::class.java)
+                intent.putExtra("userId","564asd54as87d")
+                startActivity(intent)
+
+
             }
         }
 
