@@ -13,7 +13,12 @@ import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.*
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GetTokenResult
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_oauth.*
 
 class oauth : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener {
@@ -77,12 +82,12 @@ class oauth : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener {
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
     private fun handleSignInResult(result: GoogleSignInResult /*completedTask: Task<GoogleSignInAccount>*/) {
-        Log.i("Hola", result.toString())
         if(result.isSuccess) {
             // Authenticated
             val account : GoogleSignInAccount? = result.signInAccount
-            Log.i("Hola", account.toString())
             Toast.makeText(this, "Sesión iniciada", Toast.LENGTH_SHORT).show();
+            val token = FirebaseInstanceId.getInstance().getToken()
+            Log.i("Hola", token)
             goMainActivity()
         } else {
             Toast.makeText(this,"Error al iniciar sesión", Toast.LENGTH_LONG).show();
@@ -92,4 +97,34 @@ class oauth : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener {
         val intent = Intent(this,MainActivity::class.java)
         startActivity(intent)
     }
+
+   /* private fun getToken(){
+        val user: FirebaseUser? =  FirebaseAuth.getInstance().currentUser
+        val cUser = mAuth?.currentUser
+        if (cUser==null) {
+            /*val intent = Intent(this, LoginActivity::class.java)
+            context.startActivity(intent)*/
+            Log.i("AAAAALGO", "EL valor del usuarios es "+cUser)
+            Toast.makeText(this, "EL usuario es nulo", Toast.LENGTH_LONG).show()
+            //createLoginFragment()
+        }else {
+            //println(currentUser.phoneNumber)
+
+            cUser.getIdToken(true).addOnCompleteListener(object : OnCompleteListener<GetTokenResult> {
+                override fun onComplete(task: Task<GetTokenResult>) {
+                    if (task.isSuccessful()) {
+                        val idToken = task.getResult()!!.token
+                        // Send token to your backend via HTTPS
+                        // ...
+                        println("token has been refresh")
+                    } else {
+                        // Handle error -> task.getException();
+                        println("Error Error Error Error Error Error")
+                        Toast.makeText(this@oauth, "Error al obtener el token",Toast.LENGTH_LONG).show()
+                    }
+                }
+            })
+        }
+
+    }*/
 }
