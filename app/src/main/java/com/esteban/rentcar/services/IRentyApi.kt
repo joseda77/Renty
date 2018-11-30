@@ -1,12 +1,10 @@
 package com.esteban.rentcar.services
 
 import io.reactivex.Observable
-import retrofit2.http.GET
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface IRentyApi {
 
@@ -25,6 +23,12 @@ interface IRentyApi {
 
     @GET("cars/{id}/")
     fun getCarDetails(@Path("id") id: Int): Observable<DetailCarResponse.Result>
+
+    @POST("booking")
+    fun bookingCar(@Body request: BookingCarRequest.Request): Observable<List<BookingCarResponse.Result>>
+
+    @POST("mybookings")
+    fun getBookings(@Body idToken: String): Observable<List<ListCarsResponse.Result>>
 
     companion object {
         fun create(url: String): IRentyApi {

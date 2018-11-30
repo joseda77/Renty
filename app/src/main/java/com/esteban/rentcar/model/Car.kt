@@ -1,6 +1,6 @@
 package com.esteban.rentcar.model
 
-class Car( id: Int, type: String, brand: String, model: String, price: String, rental_id: String, rental_name: String, url: String)
+class Car( id: Int, type: String, brand: String, model: String, price: String, rental_id: String, rental_name: String, url: String, pickup: String, from: String, to: String)
 {
     var id: Int = id
     var type: String = type
@@ -10,4 +10,7 @@ class Car( id: Int, type: String, brand: String, model: String, price: String, r
     var price: String = price
     var rental_id: String=rental_id
     var rental_name: String =rental_name
+    var pickup: String = pickup
+    var from: String = from
+    var to: String = to
 }
