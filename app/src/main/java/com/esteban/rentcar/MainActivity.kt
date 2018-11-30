@@ -72,7 +72,6 @@ class MainActivity : AppCompatActivity() {
 
                 }
             }
-
             //EVENTOS
         refreshList()
         updateDateInView()
@@ -80,16 +79,17 @@ class MainActivity : AppCompatActivity() {
             txtDateFrom!!.setOnClickListener(object : View.OnClickListener {
                 override fun onClick(view: View) {
                     btnDateCurrent = 1
-                    DatePickerDialog(this@MainActivity, dataSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
+                    DatePickerDialog(this@MainActivity, dataSetListener, calendar.get(Calendar.YEAR),
+                            calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
                 }
             })
             txtDateTo!!.setOnClickListener(object : View.OnClickListener {
                 override fun onClick(view: View) {
                     btnDateCurrent = 2
-                    DatePickerDialog(this@MainActivity, dataSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
+                    DatePickerDialog(this@MainActivity, dataSetListener, calendar.get(Calendar.YEAR),
+                            calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
                 }
             })
-
 
             //Evento -> Search Button
             search_button.setOnClickListener {
@@ -103,9 +103,13 @@ class MainActivity : AppCompatActivity() {
                     IRentyApi.create("https://renty-web.herokuapp.com/")
                 }
 
+                val rentyServe2 by lazy {
+                    IRentyApi.create("https://renty-ruby.herokuapp.com/")
+                }
+
                 listCar = ArrayList()
                 var progressDialog = ProgressDialog(this)
-                progressDialog.setMessage("Retraiving data")
+                progressDialog.setMessage("Getting cars")
                 progressDialog.setCancelable(false)
                 progressDialog.show()
                 disposable = rentyServe.getCarList(fromDate, toDate, typeCar, pickUp).subscribeOn(Schedulers.io())
@@ -116,27 +120,46 @@ class MainActivity : AppCompatActivity() {
                                     for (car in response) {
                                         listCar.add(Car(car.id, car.type, car.brand, car.model,
                                                 car.price.toString(), car.rental.id.toString(),
-                                                car.rental.name, car.thumbnail))
+                                                car.rental.name, car.thumbnail,pickUp,fromDate,toDate))
                                     }
-                                    refreshList()
-                                    progressDialog.dismiss()
                                 }
                                 ,
                                 { error ->
                                     progressDialog.dismiss()
                                     Toast.makeText(this,
-                                            "No se encuentran vehiculos con los parametros ingresados",
+                                            "No se encuentran vehiculos con los parametros ingresados en Python",
                                             Toast.LENGTH_LONG).show()
                                 }
                         )
-                closeKeyBoard()
 
+                disposable = rentyServe2.getCarList(fromDate, toDate, typeCar,pickUp).subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                { response ->
+
+                                    for(car in response) {
+                                        listCar.add(Car(car.id, car.type, car.brand, car.model,
+                                                car.price.toString(), car.rental.id.toString(),
+                                                car.rental.name, car.thumbnail,pickUp,fromDate,toDate))
+                                    }
+                                    refreshList()
+                                    progressDialog.dismiss()
+                                },
+                                { error ->
+                                    progressDialog.dismiss()
+                                    Toast.makeText(this,
+                                            "No se encuentran vehiculos con los parametros ingresados en Ruby",
+                                            Toast.LENGTH_LONG).show()
+                                }
+                        )
+                //listCar = getList()
+                closeKeyBoard()
                 //ocultar panel
                 values_container.visibility = View.GONE
                 show_hide_button.text = "SHOW"
                 showPanel = false
                 search_button.visibility = View.GONE
-
+                refreshList()
             }
 
             //Evento -> Hide-Show Panel
@@ -160,18 +183,22 @@ class MainActivity : AppCompatActivity() {
             my_recycler.adapter = CarAdapter(this, listCar)
         }
 
-        fun getList(): ArrayList<Car> {
+        /*fun getList(): ArrayList<Car> {
             var list = ArrayList<Car>()
-/*
-            list.add(Car(2, "Type","Brand ", "model ", "price ","rental_id 2","rental_name", "https://i.imgur.com/IyEp7mf.jpg"))
-            list.add(Car(3, "Type","Brand ", "model ", "price ","rental_id 3","rental_name", "https://i.imgur.com/XEgyzCW.jpg"))
-            list.add(Car(4, "Type","Brand ", "model ", "price ","rental_id 4","rental_name", "https://i.imgur.com/72bQoTW.jpg"))
-            list.add(Car(5, "Type","Brand ", "model ", "price ","rental_id 5","rental_name", "https://i.imgur.com/fbPHUCn.jpg"))
-            list.add(Car(6, "Type","Brand ", "model ", "price ","rental_id 1","rental_name", "https://i.imgur.com/1wrP717.jpg"))
 
-*/
-            return list;
-        }
+            list.add(Car(2, "Type","Brand ", "model ", "price ",
+                    "rental_id 2","rental_name", "https://i.imgur.com/IyEp7mf.jpg"))
+            list.add(Car(3, "Type","Brand ", "model ", "price ",
+                    "rental_id 3","rental_name", "https://i.imgur.com/XEgyzCW.jpg"))
+            list.add(Car(4, "Type","Brand ", "model ", "price ",
+                    "rental_id 4","rental_name", "https://i.imgur.com/72bQoTW.jpg"))
+            list.add(Car(5, "Type","Brand ", "model ", "price ",
+                    "rental_id 5","rental_name", "https://i.imgur.com/fbPHUCn.jpg"))
+            list.add(Car(6, "Type","Brand ", "model ", "price ",
+                    "rental_id 1","rental_name", "https://i.imgur.com/1wrP717.jpg"))
+
+            return list
+        }*/
 
         private fun closeKeyBoard() {
             var view = this.currentFocus

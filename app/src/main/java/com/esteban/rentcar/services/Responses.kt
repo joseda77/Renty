@@ -22,3 +22,9 @@ object DetailCarResponse {
 
     data class Rental(val id: Int, val name: String)
 }
+
+object BookingCarResponse {
+    data class Result(val bookingId: String, val token: String, val carId: ListCarsResponse.Result,
+                      val bookingDate: String, val pickup: String, val pickupDate: String,
+                      val deliverPlace: String, val deliverDate: String, val rental: DetailCarResponse.Rental)
+}
