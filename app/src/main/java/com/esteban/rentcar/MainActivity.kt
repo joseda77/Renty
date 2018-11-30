@@ -122,6 +122,7 @@ class MainActivity : AppCompatActivity() {
                                                 car.price.toString(), car.rental.id.toString(),
                                                 car.rental.name, car.thumbnail,pickUp,fromDate,toDate))
                                     }
+                                    refreshList()
                                 }
                                 ,
                                 { error ->
