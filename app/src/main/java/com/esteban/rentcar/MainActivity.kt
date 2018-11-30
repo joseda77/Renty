@@ -93,7 +93,9 @@ class MainActivity : AppCompatActivity() {
 
             //Evento -> Search Button
             search_button.setOnClickListener {
-                pickUp = pick_up.text.toString()
+                var intent: Intent = Intent(this, oauth::class.java)
+                startActivity(intent)
+                /*pickUp = pick_up.text.toString()
                 typeCar = type.selectedItem.toString()
                 fromDate = txtDateFrom!!.text.toString()
                 toDate = txtDateTo!!.text.toString()
@@ -135,7 +137,7 @@ class MainActivity : AppCompatActivity() {
                 values_container.visibility = View.GONE
                 show_hide_button.text = "SHOW"
                 showPanel = false
-                search_button.visibility = View.GONE
+                search_button.visibility = View.GONE*/
 
             }
 
