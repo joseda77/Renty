@@ -67,8 +67,9 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
         }
 
         holder.btn_rent_car.setOnClickListener {
-           /* val intent: Intent = Intent(holder.context,oauth::class.java)
-            holder.context.startActivity(intent)*/
+            val intent: Intent = Intent(holder.context,oauth::class.java)
+            holder.context.startActivity(intent)
+            /*
             val token = "LLego algo de firebase"
             val today = "today"
             val deliverPlace = "aeropuerto"
@@ -81,6 +82,7 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
             } else if (carList[position].rental_id == rubyId) {
                 rentCar(2,bookingRequest)
             }
+            */
         }
 
     }

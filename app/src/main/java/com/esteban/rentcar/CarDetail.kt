@@ -36,9 +36,11 @@ class CarDetail : AppCompatActivity() {
         val to = intent.getStringExtra("to")
 
         rent.setOnClickListener {
-            /*val intent: Intent = Intent(this, oauth::class.java)
-            startActivity(intent)*/
+            var requestCode: Int = 123
+            val intent: Intent = Intent(this, oauth::class.java)
+            startActivityForResult(intent,requestCode)
 
+            /*
             val token = "LLego algo de firebase"
             val today = "today"
             val deliverPlace = "aeropuerto"
@@ -82,7 +84,7 @@ class CarDetail : AppCompatActivity() {
                                 }
                         )
             }
-        }
+            */}
 
 
         val rentyServe by lazy {
