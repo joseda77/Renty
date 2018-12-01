@@ -36,7 +36,7 @@ class CarDetail : AppCompatActivity() {
         val to = intent.getStringExtra("to")
 
         rent.setOnClickListener {
-            var requestCode: Int = 123
+            var requestCode = 0
             val intent: Intent = Intent(this, oauth::class.java)
             startActivityForResult(intent,requestCode)
 
@@ -182,5 +182,11 @@ class CarDetail : AppCompatActivity() {
                                 progressDialog.dismiss()
                             })
         }
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
+        super.onActivityResult(requestCode, resultCode, data)
+        //Toast.makeText(this, data!!.getStringExtra("idToken"), Toast.LENGTH_LONG).show();
     }
 }
