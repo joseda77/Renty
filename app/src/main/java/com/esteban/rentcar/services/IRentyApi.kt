@@ -11,7 +11,7 @@ interface IRentyApi {
     @GET("cars/search")
     fun getCarList(@Query("from") from: String,
                    @Query("to") to: String,
-                   @Query("type") type: String,
+                   @Query("type") type: Int,
                    @Query("pickup") pickUp: String): Observable<List<ListCarsResponse.Result>>
 
     /*
@@ -24,11 +24,16 @@ interface IRentyApi {
     @GET("cars/{id}/")
     fun getCarDetails(@Path("id") id: Int): Observable<DetailCarResponse.Result>
 
-    @POST("booking")
-    fun bookingCar(@Body request: BookingCarRequest.Request): Observable<List<BookingCarResponse.Result>>
 
-    @POST("mybookings")
-    fun getBookings(@Body idToken: String): Observable<List<ListCarsResponse.Result>>
+    //Para reservar es desde aquí
+    @POST("booking")
+    fun bookingCar(@Body request: BookingCarRequest.Request): Observable<BookingCarResponse.Result>
+
+    @GET("booking/{token}")
+    fun getBookingCars(@Path("token") token: String) : Observable<List<UserCarsResponse.Result>>
+
+    @DELETE("booking")
+    fun deleteBookingCar(@Body request: DeleteBookingCarRequest.Request): Observable<List<UserCarsResponse.Result>>
 
     companion object {
         fun create(url: String): IRentyApi {

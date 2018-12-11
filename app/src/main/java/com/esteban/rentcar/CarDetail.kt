@@ -43,7 +43,7 @@ class CarDetail : AppCompatActivity() {
             val today = "today"
             val deliverPlace = "aeropuerto"
             var bookingRequest = BookingCarRequest.Request(token,id, today, pickup, from, deliverPlace,
-                    to, rentalID)
+                    to)
 
             if(rentalID == pythonId){
                 val rentyServe by lazy {
