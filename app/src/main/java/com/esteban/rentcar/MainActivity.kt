@@ -6,7 +6,6 @@ import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
@@ -18,7 +17,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import android.content.Intent
-import com.esteban.rentcar.R.id.gone
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -132,7 +130,6 @@ class MainActivity : AppCompatActivity() {
                                             Toast.LENGTH_LONG).show()
                                 }
                         )
-
                 disposable = rentyServe2.getCarList(fromDate, toDate, typeCar,pickUp).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
