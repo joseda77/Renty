@@ -98,12 +98,10 @@ class CarDetail : AppCompatActivity() {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             { response ->
-                                id_car.text = response.id.toString()
                                 type.text = response.type
                                 brand.text = response.brand
                                 model.text = response.model
                                 price.text = response.price.toString()
-                                rental_id.text = response.rental.id.toString()
                                 rental_name.text = response.rental.name
                                 thumbnail.layoutParams.height = 400
                                 thumbnail.layoutParams.width = 400
@@ -140,12 +138,10 @@ class CarDetail : AppCompatActivity() {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             { response ->
-                                id_car.text = response.id.toString()
                                 type.text = response.type
                                 brand.text = response.brand
                                 model.text = response.model
                                 price.text = response.price.toString()
-                                rental_id.text = response.rental.id.toString()
                                 rental_name.text = response.rental.name
                                 thumbnail.layoutParams.height = 400
                                 thumbnail.layoutParams.width = 400

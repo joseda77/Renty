@@ -2,17 +2,13 @@ package com.esteban.rentcar.Adapter
 
 import android.content.Context
 import android.content.Intent
-import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import com.esteban.rentcar.CarDetail
 import com.esteban.rentcar.R
-import com.esteban.rentcar.R.id.from
-import com.esteban.rentcar.R.id.to
 import com.esteban.rentcar.model.Car
-import com.esteban.rentcar.oauth
 import com.esteban.rentcar.services.BookingCarRequest
 import com.esteban.rentcar.services.IRentyApi
 import com.squareup.picasso.Picasso

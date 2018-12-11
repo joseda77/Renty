@@ -17,9 +17,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import android.content.Intent
+import android.util.Log
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlinx.coroutines.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -120,6 +122,7 @@ class MainActivity : AppCompatActivity() {
                                                 car.price.toString(), car.rental.id.toString(),
                                                 car.rental.name, car.thumbnail,pickUp,fromDate,toDate))
                                     }
+
                                     refreshList()
                                 }
                                 ,
@@ -130,11 +133,11 @@ class MainActivity : AppCompatActivity() {
                                             Toast.LENGTH_LONG).show()
                                 }
                         )
-                disposable = rentyServe2.getCarList(fromDate, toDate, typeCar,pickUp).subscribeOn(Schedulers.io())
+
+                disposable = rentyServe.getCarList(fromDate, toDate, typeCar,pickUp).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
                                 { response ->
-
                                     for(car in response) {
                                         listCar.add(Car(car.id, car.type, car.brand, car.model,
                                                 car.price.toString(), car.rental.id.toString(),
