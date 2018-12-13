@@ -76,7 +76,7 @@
                 android:layout_height="match_parent"
                 android:autofillHints=""
                 android:inputType="date"
-                android:text="dd/mm/aaaa"
+                android:text="aaaa-mm-dd"
                 android:textColor="@color/colorAccent"
                 android:textSize="17sp"
                 android:textStyle="bold" />

@@ -25,7 +25,7 @@ class CarDetail : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_car_detail)
         var progressDialog = ProgressDialog(this)
-        progressDialog.setMessage("Retraiving data")
+        progressDialog.setMessage("Getting data")
         progressDialog.setCancelable(false)
         progressDialog.show()
         val intent = intent

@@ -109,6 +109,7 @@ class MainActivity : AppCompatActivity() {
 
             if (pickUp == "Aeropuerto") pickUp = "mde"
 
+
             val sdf = SimpleDateFormat("YYYY-MM-dd")
             val today = sdf.format(Date())
 
@@ -118,6 +119,13 @@ class MainActivity : AppCompatActivity() {
                         Toast.LENGTH_LONG).show()
                 return@setOnClickListener
 
+            }
+
+            if (toDate == "aaaa-mm-dd") {
+                Toast.makeText(this,
+                        "Selecciona una fecha de entrega",
+                        Toast.LENGTH_LONG).show()
+                return@setOnClickListener
             }
 
             if(fromDate.compareTo(toDate,true) > 0) {
