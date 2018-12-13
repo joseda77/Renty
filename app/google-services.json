@@ -1,35 +1,27 @@
 {
   "project_info": {
-    "project_number": "433592310046",
-    "firebase_url": "https://renty-9f311.firebaseio.com",
-    "project_id": "renty-9f311",
-    "storage_bucket": "renty-9f311.appspot.com"
+    "project_number": "28025495187",
+    "firebase_url": "https://renty-vue.firebaseio.com",
+    "project_id": "renty-vue",
+    "storage_bucket": "renty-vue.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:433592310046:android:7eb0d1628f17cee9",
+        "mobilesdk_app_id": "1:28025495187:android:7eb0d1628f17cee9",
         "android_client_info": {
           "package_name": "com.esteban.rentcar"
         }
       },
       "oauth_client": [
         {
-          "client_id": "433592310046-m0qqlidvd159vo4ac7r52uc1ltiut6tl.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.esteban.rentcar",
-            "certificate_hash": "ea38d6207dfe7cc10f34e9a1349f4b4d40eb8902"
-          }
-        },
-        {
-          "client_id": "433592310046-ptagtfb5gds2e1r1l2p3rns6cr6n1tui.apps.googleusercontent.com",
+          "client_id": "28025495187-4msv288l1o7tsu382s6t4dq3al2rj37d.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCWu67uISdCyrmfwqaRkDb8Heu7jglZd_s"
+          "current_key": "AIzaSyCyRcU_kZsfDS5wVYfzA6h0xhmFzqIIIyc"
         }
       ],
       "services": {
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "433592310046-ptagtfb5gds2e1r1l2p3rns6cr6n1tui.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
