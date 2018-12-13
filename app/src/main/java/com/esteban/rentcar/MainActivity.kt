@@ -50,7 +50,12 @@ class MainActivity : AppCompatActivity() {
         my_recycler.setHasFixedSize(true)
         my_recycler.layoutManager = LinearLayoutManager(this)
 
-
+        var items_of_pick_up = arrayOf("Aeropuerto")
+        val adapter_pick_up = ArrayAdapter(this, android.R.layout.simple_spinner_item, items_of_pick_up)
+        // Configura un diseño depslegable al adpater
+        adapter_pick_up.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        // Enlazar el adaper creado con el spinner del view
+        pick_up!!.setAdapter(adapter_pick_up)
             //Configuración del Spinner
         var items_of_type = arrayOf("Económico", "Compacto", "SUV", "Lujo")
             // Crear el ArrayAdapter para el spinner
@@ -93,20 +98,20 @@ class MainActivity : AppCompatActivity() {
 
             //Evento -> Search Button
             search_button.setOnClickListener {
-                pickUp = pick_up.text.toString()
+                pickUp = pick_up.selectedItem.toString()
                 typeCar = type.selectedItem.toString()
                 fromDate = txtDateFrom!!.text.toString()
                 toDate = txtDateTo!!.text.toString()
-                var typeCode : Int = 0
+                var typeCode : String = ""
 
                 if (typeCar == "Económico") {
-                    typeCode = 1
+                    typeCode = "1"
                 } else if (typeCar == "Compacto") {
-                    typeCode = 2
+                    typeCode = "2"
                 } else if (typeCar == "SUV") {
-                    typeCode = 3
+                    typeCode = "3"
                 } else if (typeCar == "Lujo") {
-                    typeCode = 4
+                    typeCode = "4"
                 }
 
                 val rentyServe by lazy {

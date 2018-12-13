@@ -26,8 +26,8 @@ class ServiceTest {
     }
     private val fromDate: String = "2018-12-15"
     private val toDate: String = "2018-12-17"
-    private val pickUp: String = "4"
-    private val typeCar: String = "mde"
+    private val pickUp: String = "mde"
+    private val typeCar: String = "4"
     @Test
     fun servicePythonOneOMoreCar(){
         listCar = ArrayList()

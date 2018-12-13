@@ -16,18 +16,13 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp">
 
-        <EditText
+        <Spinner
             android:id="@+id/pick_up"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:autoText="true"
-            android:autofillHints=""
-            android:hint="@string/pick_up"
-            android:inputType=""
-            android:singleLine="false"
-            android:textColor="@color/colorAccent"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content"
+            android:outlineAmbientShadowColor="@color/colorAccent"
+            android:outlineSpotShadowColor="@color/colorAccent" />
 
         <Spinner
             android:id="@+id/type"
