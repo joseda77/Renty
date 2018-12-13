@@ -17,7 +17,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import android.content.Intent
+import android.support.design.widget.Snackbar
 import android.util.Log
+import kotlinx.android.synthetic.main.activity_coordinator_main.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -38,9 +40,17 @@ class MainActivity : AppCompatActivity() {
     var pickUp: String = ""
     var typeCar: String = ""
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_coordinator_main)
+
+        fab.setOnClickListener { view ->
+            val intent:Intent = Intent(this, ShowBookings::class.java)
+            intent.putExtra("userId","564asd54as87d")
+            startActivity(intent)
+        }
 
         //Instanciar los views en las variables
         txtDateFrom = from

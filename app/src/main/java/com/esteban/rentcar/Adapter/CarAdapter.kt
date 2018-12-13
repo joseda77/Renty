@@ -24,6 +24,7 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
     var disposable: Disposable? = null
     val pythonId = "967543461"
     val rubyId = "123456789"
+    var formatPrice: CarDetail = CarDetail()
     //para especificar el layout de nuestro listado así como componer la vista
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
 
@@ -41,7 +42,7 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
     override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
         holder.txt_brand.text = carList[position].brand
         holder.txt_model.text = carList[position].model
-        holder.txt_price.text = carList[position].price + " USD"
+        holder.txt_price.text = /*carList[position].price + " USD"*/ "$"+formatPrice.formatPrice(carList[position].price)
         holder.txt_rental_name.text = carList[position].rental_name
 
         holder.itemView.setOnClickListener(View.OnClickListener {

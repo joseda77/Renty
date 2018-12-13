@@ -101,7 +101,7 @@ class CarDetail : AppCompatActivity() {
                                 type.text = response.type
                                 brand.text = response.brand
                                 model.text = response.model
-                                price.text = response.price.toString() + " USD"
+                                price.text =/* response.price.toString() + " USD"*/     "$"+formatPrice(response.price.toString())
                                 rental_name.text = response.rental.name
                                 thumbnail.layoutParams.height = 400
                                 thumbnail.layoutParams.width = 400
@@ -119,7 +119,7 @@ class CarDetail : AppCompatActivity() {
                                     newView = ImageView(this)//La configura en el contexto, en este caso sería car_Details.kt
                                     layout_scroll.addView(newView)//layout_scroll es el LInear layour que hay dentro del scroll, dentro van a ir todos los imagesviews. Añada la instancia de imageview creada
                                     //ACÁ PONER EL TAMAÑO DE LA IMAGEN
-                                    newView.layoutParams.height = 900
+                                    newView.layoutParams.height = 500
                                     newView.layoutParams.width = 900
                                     //Acá se le setea el url al imageview con Picasso,
                                     Picasso.get().load(url).into(newView)
@@ -141,7 +141,7 @@ class CarDetail : AppCompatActivity() {
                                 type.text = response.type
                                 brand.text = response.brand
                                 model.text = response.model
-                                price.text = response.price.toString() + " USD"
+                                price.text = /*response.price.toString() */    "$"+formatPrice(response.price.toString())
                                 rental_name.text = response.rental.name
                                 thumbnail.layoutParams.height = 400
                                 thumbnail.layoutParams.width = 400
@@ -163,7 +163,7 @@ class CarDetail : AppCompatActivity() {
                                     // del scroll, dentro van a ir todos los imagesviews. Añada la instancia de
                                     // imageview creada
                                     //ACÁ PONER EL TAMAÑO DE LA IMAGEN
-                                    newView.layoutParams.height = 900
+                                    newView.layoutParams.height = 500
                                     newView.layoutParams.width = 900
                                     //Acá se le setea el url al imageview con Picasso,
                                     Picasso.get().load(url).into(newView)
@@ -177,4 +177,28 @@ class CarDetail : AppCompatActivity() {
                             })
         }
     }
+
+
+    fun formatPrice(price: String):String{
+        Log.i("Muestra","format " +price)
+        var end = ""
+        if(price.length>3 && price.length <=6){
+            Log.i("Muestra2","format " +price.length)
+            var tamaño = price.length-3
+            var initial = price.substring(0,tamaño)
+            end = initial+"."+price.substring(tamaño,price.length)
+        }
+        else if(price.length>6){
+            var tamaño = price.length-3
+            var initial = price.substring(0,tamaño)
+            if(initial.length>3 ){
+                var tamaño2 = initial.length-3
+                var initial2 = initial.substring(0,tamaño2)
+                initial = initial2+"'"+price.substring(tamaño,price.length)
+            }
+            end = initial+"."+price.substring(tamaño,price.length)
+        }
+        return end
+    }
+
 }
