@@ -95,12 +95,12 @@ class MainActivity : AppCompatActivity() {
             typeCar = type.selectedItem.toString()
             fromDate = txtDateFrom!!.text.toString()
             toDate = txtDateTo!!.text.toString()
-            var typeCode: Int = 0
+            var typeCode: String = ""
 
-            if (typeCar == "Económico") typeCode = 1
-            else if (typeCar == "Compacto") typeCode = 2
-            else if (typeCar == "SUV") typeCode = 3
-            else if (typeCar == "Lujo") typeCode = 4
+            if (typeCar == "Económico") typeCode = "1"
+            else if (typeCar == "Compacto") typeCode = "2"
+            else if (typeCar == "SUV") typeCode = "3"
+            else if (typeCar == "Lujo") typeCode = "4"
 
             if (pickUp == "aeropuerto") pickUp = "mde"
 
