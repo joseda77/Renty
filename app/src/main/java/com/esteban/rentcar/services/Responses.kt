@@ -24,7 +24,7 @@ object DetailCarResponse {
 }
 
 object BookingCarResponse {
-    data class Result(val status: Int)
+    data class Result(val statusCode: Int)
 }
 
 object UserCarsResponse {

@@ -15,11 +15,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_car_detail.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CarDetail : AppCompatActivity() {
     var disposable: Disposable? = null
     val pythonId = 967543461
     val rubyId = 123456789
+    var idToken = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,62 +32,74 @@ class CarDetail : AppCompatActivity() {
         progressDialog.setCancelable(false)
         progressDialog.show()
         val intent = intent
-        val id = Integer.parseInt(intent.getStringExtra("idCar"))
+        val idCar = Integer.parseInt(intent.getStringExtra("idCar"))
         val rentalID = Integer.parseInt(intent.getStringExtra("rentalID"))
         val pickup = intent.getStringExtra("pickup")
         val from = intent.getStringExtra("from")
         val to = intent.getStringExtra("to")
 
         rent.setOnClickListener {
-            var requestCode = 0
-            val intent: Intent = Intent(this, oauth::class.java)
-            startActivityForResult(intent,requestCode)
 
-            /*
-            val token = "LLego algo de firebase"
-            val today = "today"
-            val deliverPlace = "mde"
-            var bookingRequest = BookingCarRequest.Request(token,id, today, pickup, from, deliverPlace,
-                    to)
+            idToken = oauth.getToken()
 
-            if(rentalID == pythonId){
-                val rentyServe by lazy {
-                    IRentyApi.create("https://renty-web.herokuapp.com/")
+            if (idToken == "") {
+                var requestCode = 0
+                val intent: Intent = Intent(this, oauth::class.java)
+                startActivityForResult(intent, requestCode)
+            } else {
+                val sdf = SimpleDateFormat("YYYY-MM-dd")
+                val today = sdf.format(Date())
+                val deliverPlace = "mde"
+                val bookingRequest = BookingCarRequest.Request(idToken, idCar, today, pickup, from,
+                        deliverPlace, to)
+
+                //Rentar en python
+                if (rentalID == pythonId) {
+                    val rentyServe by lazy {
+                        IRentyApi.create("https://renty-web.herokuapp.com/")
+                    }
+                    disposable = rentyServe.bookingCar(bookingRequest).subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(
+                                    { response ->
+
+                                        if (response.statusCode == 200) {
+                                            Toast.makeText(this,
+                                                    "Carro reservado con éxito",
+                                                    Toast.LENGTH_LONG).show()
+                                        }
+                                    }
+                                    ,
+                                    { error ->
+                                        Toast.makeText(this,
+                                                "No se puede reservar el vehiculo en Python",
+                                                Toast.LENGTH_LONG).show()
+
+                                        Log.i("miiiiiierda", error.toString())
+                                    }
+                            )
+
+                } else if (rentalID == rubyId) {
+                    val rentyServe2 by lazy {
+                        IRentyApi.create("https://renty-ruby.herokuapp.com/")
+                    }
+
+                    disposable = rentyServe2.bookingCar(bookingRequest).subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(
+                                    { response ->
+
+                                    }
+                                    ,
+                                    { error ->
+                                        Toast.makeText(this,
+                                                "No se puede reservar el vehiculo en Ruby",
+                                                Toast.LENGTH_LONG).show()
+                                    }
+                            )
                 }
-
-                disposable = rentyServe.bookingCar(bookingRequest).subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                                { response ->
-
-                                }
-                                ,
-                                { error ->
-                                    Toast.makeText(this,
-                                            "No se puede reservar el vehiculo en Python",
-                                            Toast.LENGTH_LONG).show()
-                                }
-                        )
-            } else if (rentalID == rubyId) {
-                val rentyServe2 by lazy {
-                    IRentyApi.create("https://renty-ruby.herokuapp.com/")
-                }
-
-                disposable = rentyServe2.bookingCar(bookingRequest).subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                                { response ->
-
-                                }
-                                ,
-                                { error ->
-                                    Toast.makeText(this,
-                                            "No se puede reservar el vehiculo en Ruby",
-                                            Toast.LENGTH_LONG).show()
-                                }
-                        )
             }
-            */}
+        }
 
 
         val rentyServe by lazy {
@@ -96,7 +111,7 @@ class CarDetail : AppCompatActivity() {
         }
 
         if (rentalID == 123456789) {
-            disposable = rentyServe2.getCarDetails(id).subscribeOn(Schedulers.io())
+            disposable = rentyServe2.getCarDetails(idCar).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             { response ->
@@ -131,14 +146,14 @@ class CarDetail : AppCompatActivity() {
                                 progressDialog.dismiss()
                             },
                             { error ->
-                                Toast.makeText(this,"No se pueden cargar los datos",Toast.LENGTH_LONG).show()
+                                Toast.makeText(this, "No se pueden cargar los datos", Toast.LENGTH_LONG).show()
                                 Log.e("errrrrrrr", error.toString())
                                 progressDialog.dismiss()
                             })
 
 
-        }else if(rentalID == 967543461) {
-            disposable = rentyServe.getCarDetails(id).subscribeOn(Schedulers.io())
+        } else if (rentalID == 967543461) {
+            disposable = rentyServe.getCarDetails(idCar).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             { response ->
@@ -163,7 +178,7 @@ class CarDetail : AppCompatActivity() {
                                 for (url in response.pictures) {
                                     var newView: ImageView //crea una instancia de imageview en tiempo de ejecucion
                                     newView = ImageView(this)//La configura en el contexto, en este caso
-                                                                    // sería car_Details.kt
+                                    // sería car_Details.kt
 
                                     layout_scroll.addView(newView)//layout_scroll es el LInear layour que hay dentro
                                     // del scroll, dentro van a ir todos los imagesviews. Añada la instancia de
@@ -177,7 +192,7 @@ class CarDetail : AppCompatActivity() {
                                 progressDialog.dismiss()
                             },
                             { error ->
-                                Toast.makeText(this,"No se pueden cargar los datos",Toast.LENGTH_LONG).show()
+                                Toast.makeText(this, "No se pueden cargar los datos", Toast.LENGTH_LONG).show()
                                 Log.e("errrrrrrr", error.toString())
                                 progressDialog.dismiss()
                             })
@@ -185,7 +200,7 @@ class CarDetail : AppCompatActivity() {
     }
 
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         //Toast.makeText(this, data!!.getStringExtra("idToken"), Toast.LENGTH_LONG).show();
     }

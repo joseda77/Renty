@@ -55,11 +55,19 @@ class oauth : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener {
             val account : GoogleSignInAccount? = result.signInAccount
             Toast.makeText(this, "Sesión iniciada", Toast.LENGTH_SHORT).show();
             var intent:Intent = getIntent() //Intent mediante el que se llamó la actividad oauth
+            idToken = account!!.idToken!!
             intent.putExtra("idToken",account!!.idToken)
             setResult(0,intent)
             finish()
         } else {
             Toast.makeText(this,"Error al iniciar sesión", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    companion object {
+        var idToken = ""
+        fun getToken(): String {
+            return idToken
         }
     }
 

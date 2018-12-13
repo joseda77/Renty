@@ -32,7 +32,7 @@ interface IRentyApi {
     @GET("booking/{token}")
     fun getBookingCars(@Path("token") token: String) : Observable<List<UserCarsResponse.Result>>
 
-    @DELETE("booking")
+    @PUT("booking")
     fun deleteBookingCar(@Body request: DeleteBookingCarRequest.Request): Observable<List<UserCarsResponse.Result>>
 
     companion object {
