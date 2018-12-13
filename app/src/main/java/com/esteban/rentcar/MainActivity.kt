@@ -6,7 +6,6 @@ import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
@@ -17,9 +16,16 @@ import com.esteban.rentcar.services.IRentyApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+
+import android.content.Intent
+import android.support.design.widget.Snackbar
+import android.util.Log
+import kotlinx.android.synthetic.main.activity_coordinator_main.*
+
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlinx.coroutines.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -36,9 +42,17 @@ class MainActivity : AppCompatActivity() {
     var pickUp: String = ""
     var typeCar: String = ""
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_coordinator_main)
+
+        fab.setOnClickListener { view ->
+            val intent:Intent = Intent(this, ShowBookings::class.java)
+            intent.putExtra("userId","564asd54as87d")
+            startActivity(intent)
+        }
 
         //Instanciar los views en las variables
         txtDateFrom = from
@@ -47,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         //Inicializar el Recycler
         my_recycler.setHasFixedSize(true)
         my_recycler.layoutManager = LinearLayoutManager(this)
+
 
         var items_of_pick_up = arrayOf("Aeropuerto")
         val adapter_pick_up = ArrayAdapter(this, android.R.layout.simple_spinner_item, items_of_pick_up)
@@ -64,6 +79,8 @@ class MainActivity : AppCompatActivity() {
         type!!.setAdapter(adapter_spinner)
 
 
+
+
         //Configuración de los Calendarios
         //Crear un OnDataSetListener para recibir la fecha ingresada por el usuario
         val dataSetListener = object : DatePickerDialog.OnDateSetListener {
@@ -78,6 +95,7 @@ class MainActivity : AppCompatActivity() {
         //EVENTOS
         refreshList()
         updateDateInView()
+
         // Evento -> Click en calendarios, Mostrar DatePickerDialog que es configurado con OnDateSetListener
         txtDateFrom!!.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
@@ -179,6 +197,7 @@ class MainActivity : AppCompatActivity() {
                                     listCar.add(Car(car.id, car.type, car.brand, car.model,
                                             car.price.toString(), car.rental.id.toString(),
                                             car.rental.name, car.thumbnail, pickUp, fromDate, toDate))
+
                                 }
                                 refreshList()
                                 progressDialog.dismiss()
@@ -207,7 +226,8 @@ class MainActivity : AppCompatActivity() {
                 show_hide_button.text = "SHOW"
                 showPanel = false
                 search_button.visibility = View.GONE
-            } else {
+            }
+            else {
                 values_container.visibility = View.VISIBLE
                 show_hide_button.text = "HIDE"
                 showPanel = true

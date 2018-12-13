@@ -16,7 +16,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
@@ -33,6 +33,7 @@
 
 
                     <LinearLayout
+                        android:id="@+id/CardLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -41,23 +42,43 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="10dp">
+                            android:orientation="vertical">
 
-                            <ImageView
-                                android:id="@+id/thumbnail"
+                            <LinearLayout
                                 android:layout_width="150dp"
-                                android:layout_height="150dp"
-                                android:layout_alignParentLeft="true"
-                                android:layout_alignParentTop="true"
-                                android:layout_marginRight="16dp" />
+                                android:layout_height="120dp"
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:padding="10dp">
+
+                                <ImageView
+                                    android:id="@+id/thumbnail"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_marginRight="16dp"
+                                    android:adjustViewBounds="false"
+                                    android:cropToPadding="false" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/transmission"
+                                android:layout_toRightOf="@+id/thumbnail"
+                                android:text="price"
+                                android:textSize="20sp"
+                                android:textStyle="normal|bold" />
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="top"
+                            android:layout_height="wrap_content"
+                            android:gravity="top|center"
                             android:orientation="vertical"
                             android:paddingLeft="15dp"
                             android:paddingRight="15dp">
@@ -67,25 +88,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentTop="true"
                                 android:layout_toRightOf="@+id/thumbnail"
-                                android:text="Id Car:"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/id_car"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentTop="true"
-                                android:layout_toRightOf="@+id/thumbnail"
-                                android:text="id_car" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentTop="true"
-                                android:layout_toRightOf="@+id/thumbnail"
-                                android:text="Type:"
+                                android:text="Type"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -103,7 +106,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentTop="true"
                                 android:layout_toRightOf="@+id/thumbnail"
-                                android:text="Brand:"
+                                android:text="Brand"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -121,7 +124,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentTop="true"
                                 android:layout_toRightOf="@+id/thumbnail"
-                                android:text="Model:"
+                                android:text="Model"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -133,53 +136,6 @@
                                 android:layout_below="@+id/capacity"
                                 android:layout_toRightOf="@+id/thumbnail"
                                 android:text="model" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="top"
-                            android:orientation="vertical"
-                            android:paddingLeft="15dp"
-                            android:paddingRight="15dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentTop="true"
-                                android:layout_toRightOf="@+id/thumbnail"
-                                android:text="Price:"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/price"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/transmission"
-                                android:layout_toRightOf="@+id/thumbnail"
-                                android:text="price" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentTop="true"
-                                android:layout_toRightOf="@+id/thumbnail"
-                                android:text="Rental Id:"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/rental_id"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/doors"
-                                android:layout_toRightOf="@+id/thumbnail"
-                                android:text="rental_id" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -194,12 +150,12 @@
                             <TextView
                                 android:id="@+id/rental_name"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_below="@+id/color"
                                 android:layout_toRightOf="@+id/thumbnail"
                                 android:text="rental_name" />
-                        </LinearLayout>
 
+                        </LinearLayout>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -229,7 +185,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:gravity="top"
+                            android:gravity="top|center"
                             android:orientation="vertical"
                             android:paddingLeft="15dp"
                             android:paddingRight="15dp">
@@ -239,7 +195,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentTop="true"
                                 android:layout_toRightOf="@+id/thumbnail"
-                                android:text="Plate:"
+                                android:text="Plate"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -257,7 +213,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentTop="true"
                                 android:layout_toRightOf="@+id/thumbnail"
-                                android:text="Rating:"
+                                android:text="Rating"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -275,7 +231,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentTop="true"
                                 android:layout_toRightOf="@+id/thumbnail"
-                                android:text="Capacity:"
+                                android:text="Capacity"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -293,7 +249,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentTop="true"
                                 android:layout_toRightOf="@+id/thumbnail"
-                                android:text="Transmission:"
+                                android:text="Transmission"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -310,9 +266,9 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="104dp"
                             android:layout_height="match_parent"
-                            android:gravity="top"
+                            android:gravity="top|center"
                             android:orientation="vertical"
                             android:paddingLeft="15dp"
                             android:paddingRight="15dp">
@@ -322,7 +278,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentTop="true"
                                 android:layout_toRightOf="@+id/thumbnail"
-                                android:text="Doors:"
+                                android:text="Doors"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -340,7 +296,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentTop="true"
                                 android:layout_toRightOf="@+id/thumbnail"
-                                android:text="Color:"
+                                android:text="Color"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -358,7 +314,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentTop="true"
                                 android:layout_toRightOf="@+id/thumbnail"
-                                android:text="Kms:"
+                                android:text="Kms"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />

@@ -2,19 +2,16 @@ package com.esteban.rentcar.Adapter
 
 import android.content.Context
 import android.content.Intent
-import android.support.v4.app.ActivityCompat.startActivityForResult
-import android.support.v4.content.ContextCompat.startActivity
-import android.support.v7.app.AppCompatActivity
+
+
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.esteban.rentcar.CarDetail
 import com.esteban.rentcar.R
-import com.esteban.rentcar.R.id.from
-import com.esteban.rentcar.R.id.to
 import com.esteban.rentcar.model.Car
-import com.esteban.rentcar.oauth
 import com.esteban.rentcar.services.BookingCarRequest
 import com.esteban.rentcar.services.IRentyApi
 import com.squareup.picasso.Picasso
@@ -29,6 +26,7 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
     var disposable: Disposable? = null
     val pythonId = "967543461"
     val rubyId = "123456789"
+    var formatPrice: CarDetail = CarDetail()
     //para especificar el layout de nuestro listado así como componer la vista
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
 
@@ -44,19 +42,27 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
 
     //para retornar el ítem actual
     override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
-        holder.txt_id.text = carList[position].id.toString()
-        holder.txt_type.text = carList[position].type
         holder.txt_brand.text = carList[position].brand
         holder.txt_model.text = carList[position].model
-        holder.txt_price.text = carList[position].price
-        holder.txt_rental_id.text = carList[position].rental_id
+        holder.txt_price.text = /*carList[position].price + " USD"*/ "$"+formatPrice.formatPrice(carList[position].price)
         holder.txt_rental_name.text = carList[position].rental_name
+
+        holder.itemView.setOnClickListener(View.OnClickListener {
+            val intent :Intent = Intent(holder.context, CarDetail::class.java)
+            intent.putExtra("idCar",carList[position].id.toString())
+            intent.putExtra("rentalID", carList[position].rental_id)
+            intent.putExtra("pickup", carList[position].pickup)
+            intent.putExtra("from",carList[position].from)
+            intent.putExtra("to", carList[position].to)
+            holder.context.startActivity(intent)
+        })
+
 
 
         Picasso.get().load(carList[position].thumbnail_url).placeholder(R.drawable.ic_launcher_foreground)
                 .into(holder.img_thumbnail)
 
-
+/*
         holder.btn_see_car.setOnClickListener{
             val intent :Intent = Intent(holder.context, CarDetail::class.java)
             intent.putExtra("idCar",carList[position].id.toString())
@@ -74,7 +80,7 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
 
 
 
-            /*
+
             val token = "LLego algo de firebase"
             val today = "today"
             val deliverPlace = "mde"
@@ -86,9 +92,8 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
                 rentCar(1,bookingRequest)
             } else if (carList[position].rental_id == rubyId) {
                 rentCar(2,bookingRequest)
-            }
-            */
-        }
+            }*/
+
 
     }
 
@@ -131,6 +136,7 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
                     )
         }
     }
+
 
 
 }
