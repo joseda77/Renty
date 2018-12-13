@@ -25,7 +25,7 @@ class CarDetail : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_car_detail)
         var progressDialog = ProgressDialog(this)
-        progressDialog.setMessage("Retraiving data")
+        progressDialog.setMessage("Getting data")
         progressDialog.setCancelable(false)
         progressDialog.show()
         val intent = intent
@@ -43,7 +43,7 @@ class CarDetail : AppCompatActivity() {
             /*
             val token = "LLego algo de firebase"
             val today = "today"
-            val deliverPlace = "aeropuerto"
+            val deliverPlace = "mde"
             var bookingRequest = BookingCarRequest.Request(token,id, today, pickup, from, deliverPlace,
                     to)
 

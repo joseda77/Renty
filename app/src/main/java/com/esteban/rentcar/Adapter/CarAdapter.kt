@@ -77,7 +77,7 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
             /*
             val token = "LLego algo de firebase"
             val today = "today"
-            val deliverPlace = "aeropuerto"
+            val deliverPlace = "mde"
             var bookingRequest = BookingCarRequest.Request(token,carList[position].id, today,
                     carList[position].pickup, carList[position].from, deliverPlace,
                     carList[position].to)
