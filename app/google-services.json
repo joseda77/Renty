@@ -15,6 +15,38 @@
       },
       "oauth_client": [
         {
+          "client_id": "28025495187-2kuip133jvev2tu8mdinqpfc25s9kqqp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.esteban.rentcar",
+            "certificate_hash": "4c773b993e020659f5efe6f0fc64d71eaf491282"
+          }
+        },
+        {
+          "client_id": "28025495187-df5a4c4a85k1jp6qsj1h23c8nqnt64j8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.esteban.rentcar",
+            "certificate_hash": "ce2bf64c2c95cde978c43f942d492d149384ae8c"
+          }
+        },
+        {
+          "client_id": "28025495187-13g3iosutdnl9rlp12u34d7q4och7daj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.esteban.rentcar",
+            "certificate_hash": "d713d7c26668044fe808200ac14daef809ab7ecd"
+          }
+        },
+        {
+          "client_id": "28025495187-h27m1vfp35a23vorfv41sma3vm4tahdp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.esteban.rentcar",
+            "certificate_hash": "639a7a68682b18f3289452070c43d7a470e49c40"
+          }
+        },
+        {
           "client_id": "28025495187-4msv288l1o7tsu382s6t4dq3al2rj37d.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +61,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "28025495187-4msv288l1o7tsu382s6t4dq3al2rj37d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
