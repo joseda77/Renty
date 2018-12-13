@@ -17,10 +17,4 @@ class CarViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
     val btn_see_car = itemView.see_car_button
     val btn_rent_car = itemView.rent
     val context = itemView.getContext()
-
-
-
-
-
-
 }
