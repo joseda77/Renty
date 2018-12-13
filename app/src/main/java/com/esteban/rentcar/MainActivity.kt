@@ -48,8 +48,13 @@ class MainActivity : AppCompatActivity() {
         my_recycler.setHasFixedSize(true)
         my_recycler.layoutManager = LinearLayoutManager(this)
 
-
-        //Configuración del Spinner
+        var items_of_pick_up = arrayOf("Aeropuerto")
+        val adapter_pick_up = ArrayAdapter(this, android.R.layout.simple_spinner_item, items_of_pick_up)
+        // Configura un diseño depslegable al adpater
+        adapter_pick_up.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        // Enlazar el adaper creado con el spinner del view
+        pick_up!!.setAdapter(adapter_pick_up)
+            //Configuración del Spinner
         var items_of_type = arrayOf("Económico", "Compacto", "SUV", "Lujo")
         // Crear el ArrayAdapter para el spinner
         val adapter_spinner = ArrayAdapter(this, android.R.layout.simple_spinner_item, items_of_type)
@@ -91,7 +96,7 @@ class MainActivity : AppCompatActivity() {
 
         //Evento -> Search Button
         search_button.setOnClickListener {
-            pickUp = pick_up.text.toString()
+            pickUp = pick_up.selectedItem.toString()
             typeCar = type.selectedItem.toString()
             fromDate = txtDateFrom!!.text.toString()
             toDate = txtDateTo!!.text.toString()
@@ -102,7 +107,7 @@ class MainActivity : AppCompatActivity() {
             else if (typeCar == "SUV") typeCode = "3"
             else if (typeCar == "Lujo") typeCode = "4"
 
-            if (pickUp == "aeropuerto") pickUp = "mde"
+            if (pickUp == "Aeropuerto") pickUp = "mde"
 
             val sdf = SimpleDateFormat("YYYY-MM-dd")
             val today = sdf.format(Date())
@@ -134,10 +139,12 @@ class MainActivity : AppCompatActivity() {
             progressDialog.setMessage("Getting cars")
             progressDialog.setCancelable(false)
             progressDialog.show()
+
             disposable = rentyServe.getCarList(fromDate, toDate, typeCode, pickUp).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             { response ->
+                                Log.i("OOOOOOO","Tra eesti "+response.toString())
                                 //response.cars cuando los metodos retornen lo que deban
                                 for (car in response) {
                                     listCar.add(Car(car.id, car.type, car.brand, car.model,

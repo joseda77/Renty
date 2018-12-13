@@ -2,7 +2,9 @@ package com.esteban.rentcar.Adapter
 
 import android.content.Context
 import android.content.Intent
+import android.support.v4.app.ActivityCompat.startActivityForResult
 import android.support.v4.content.ContextCompat.startActivity
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -67,8 +69,12 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
         }
 
         holder.btn_rent_car.setOnClickListener {
-           /* val intent: Intent = Intent(holder.context,oauth::class.java)
-            holder.context.startActivity(intent)*/
+            val intent: Intent = Intent(holder.context,oauth::class.java)
+            holder.context.startActivity(intent)
+
+
+
+            /*
             val token = "LLego algo de firebase"
             val today = "today"
             val deliverPlace = "mde"
@@ -81,6 +87,7 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
             } else if (carList[position].rental_id == rubyId) {
                 rentCar(2,bookingRequest)
             }
+            */
         }
 
     }
@@ -124,4 +131,6 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
                     )
         }
     }
+
+
 }

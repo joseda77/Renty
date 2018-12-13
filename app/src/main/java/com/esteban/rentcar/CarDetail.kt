@@ -36,9 +36,11 @@ class CarDetail : AppCompatActivity() {
         val to = intent.getStringExtra("to")
 
         rent.setOnClickListener {
-            /*val intent: Intent = Intent(this, oauth::class.java)
-            startActivity(intent)*/
+            var requestCode = 0
+            val intent: Intent = Intent(this, oauth::class.java)
+            startActivityForResult(intent,requestCode)
 
+            /*
             val token = "LLego algo de firebase"
             val today = "today"
             val deliverPlace = "mde"
@@ -82,7 +84,7 @@ class CarDetail : AppCompatActivity() {
                                 }
                         )
             }
-        }
+            */}
 
 
         val rentyServe by lazy {
@@ -180,5 +182,11 @@ class CarDetail : AppCompatActivity() {
                                 progressDialog.dismiss()
                             })
         }
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
+        super.onActivityResult(requestCode, resultCode, data)
+        //Toast.makeText(this, data!!.getStringExtra("idToken"), Toast.LENGTH_LONG).show();
     }
 }
