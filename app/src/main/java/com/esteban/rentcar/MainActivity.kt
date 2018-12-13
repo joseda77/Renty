@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         my_recycler.layoutManager = LinearLayoutManager(this)
 
 
-            //Configuración del Spinner
+            //Configuración del Spinner typcar
         var items_of_type = arrayOf("Económico", "Compacto", "SUV", "Lujo")
             // Crear el ArrayAdapter para el spinner
         val adapter_spinner = ArrayAdapter(this, android.R.layout.simple_spinner_item, items_of_type)
@@ -59,6 +59,16 @@ class MainActivity : AppCompatActivity() {
         adapter_spinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             // Enlazar el adaper creado con el spinner del view
         type!!.setAdapter(adapter_spinner)
+
+        //Configuración del Spinner pickup
+        var items_of_pickup = arrayOf("mde")
+        // Crear el ArrayAdapter para el spinner
+        val adapter_spinner_pickup = ArrayAdapter(this, android.R.layout.simple_spinner_item, items_of_pickup)
+        // Configura un diseño depslegable al adpater
+        adapter_spinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        // Enlazar el adaper creado con el spinner del view
+        pickup!!.setAdapter(adapter_spinner_pickup)
+
 
 
             //Configuración de los Calendarios
@@ -93,7 +103,7 @@ class MainActivity : AppCompatActivity() {
 
             //Evento -> Search Button
             search_button.setOnClickListener {
-                pickUp = pick_up.text.toString()
+                pickUp = pickup.selectedItem.toString()
                 typeCar = type.selectedItem.toString()
                 fromDate = txtDateFrom!!.text.toString()
                 toDate = txtDateTo!!.text.toString()
@@ -178,7 +188,7 @@ class MainActivity : AppCompatActivity() {
 
             //Evento -> Hide-Show Panel
             show_hide_button.setOnClickListener {
-                /*if (showPanel == true) {
+                if (showPanel == true) {
                     values_container.visibility = View.GONE
                     show_hide_button.text = "SHOW"
                     showPanel = false
@@ -188,10 +198,10 @@ class MainActivity : AppCompatActivity() {
                     show_hide_button.text = "HIDE"
                     showPanel = true
                     search_button.visibility = View.VISIBLE
-                }*/
-                val intent:Intent = Intent(this, ShowBookings::class.java)
+                }
+              /*  val intent:Intent = Intent(this, ShowBookings::class.java)
                 intent.putExtra("userId","564asd54as87d")
-                startActivity(intent)
+                startActivity(intent)*/
 
 
             }

@@ -101,7 +101,7 @@ class CarDetail : AppCompatActivity() {
                                 type.text = response.type
                                 brand.text = response.brand
                                 model.text = response.model
-                                price.text = response.price.toString()
+                                price.text = response.price.toString() + " USD"
                                 rental_name.text = response.rental.name
                                 thumbnail.layoutParams.height = 400
                                 thumbnail.layoutParams.width = 400
@@ -141,7 +141,7 @@ class CarDetail : AppCompatActivity() {
                                 type.text = response.type
                                 brand.text = response.brand
                                 model.text = response.model
-                                price.text = response.price.toString()
+                                price.text = response.price.toString() + " USD"
                                 rental_name.text = response.rental.name
                                 thumbnail.layoutParams.height = 400
                                 thumbnail.layoutParams.width = 400

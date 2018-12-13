@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.esteban.rentcar.CarDetail
@@ -38,19 +39,27 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
 
     //para retornar el ítem actual
     override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
-        holder.txt_id.text = carList[position].id.toString()
-        holder.txt_type.text = carList[position].type
         holder.txt_brand.text = carList[position].brand
         holder.txt_model.text = carList[position].model
-        holder.txt_price.text = carList[position].price
-        holder.txt_rental_id.text = carList[position].rental_id
+        holder.txt_price.text = carList[position].price + " USD"
         holder.txt_rental_name.text = carList[position].rental_name
+
+        holder.itemView.setOnClickListener(View.OnClickListener {
+            val intent :Intent = Intent(holder.context, CarDetail::class.java)
+            intent.putExtra("idCar",carList[position].id.toString())
+            intent.putExtra("rentalID", carList[position].rental_id)
+            intent.putExtra("pickup", carList[position].pickup)
+            intent.putExtra("from",carList[position].from)
+            intent.putExtra("to", carList[position].to)
+            holder.context.startActivity(intent)
+        })
+
 
 
         Picasso.get().load(carList[position].thumbnail_url).placeholder(R.drawable.ic_launcher_foreground)
                 .into(holder.img_thumbnail)
 
-
+/*
         holder.btn_see_car.setOnClickListener{
             val intent :Intent = Intent(holder.context, CarDetail::class.java)
             intent.putExtra("idCar",carList[position].id.toString())
@@ -77,7 +86,7 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
             } else if (carList[position].rental_id == rubyId) {
                 rentCar(2,bookingRequest)
             }
-        }
+        }*/
 
     }
 
@@ -120,4 +129,8 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
                     )
         }
     }
+
+
+
+    //OnclickListener RecyclerView
 }
