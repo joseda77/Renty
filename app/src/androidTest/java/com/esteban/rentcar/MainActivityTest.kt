@@ -25,7 +25,14 @@ class MainActivityTest{
     fun clickSearchButton() {
         onView(withId(R.id.search_button)).check(ViewAssertions.matches(isDisplayed()))
         onView(withId(R.id.search_button)).check(ViewAssertions.matches(isEnabled()))
-       // onView(withId(R.id.search_button)).perform(click())
+        //onView(withId(R.id.search_button)).perform(click())
+    }
+
+    @Test
+    fun clickPickUpSelector() {
+        onView(withId(R.id.pick_up)).check(ViewAssertions.matches(isDisplayed()))
+        onView(withId(R.id.pick_up)).check(ViewAssertions.matches(isEnabled()))
+        onView(withId(R.id.pick_up)).perform(click())
     }
 
     @Test
@@ -36,19 +43,19 @@ class MainActivityTest{
     }
 
     @Test
-    fun clickTypeSpinner() {
+    fun clickTypeSelector() {
         onView(withId(R.id.type)).check(ViewAssertions.matches(isDisplayed()))
         onView(withId(R.id.type)).perform(click())
     }
 
     @Test
-    fun clickFromSpinner() {
+    fun clickFromCalendar() {
         onView(withId(R.id.from)).check(ViewAssertions.matches(isDisplayed()))
         onView(withId(R.id.from)).perform(click())
     }
 
     @Test
-    fun clickToSpinner() {
+    fun clickToCalendar() {
         onView(withId(R.id.to)).check(ViewAssertions.matches(isDisplayed()))
         onView(withId(R.id.to)).perform(click())
     }
