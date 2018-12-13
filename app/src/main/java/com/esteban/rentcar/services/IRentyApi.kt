@@ -11,7 +11,7 @@ interface IRentyApi {
     @GET("cars/search")
     fun getCarList(@Query("from") from: String,
                    @Query("to") to: String,
-                   @Query("type") type: Int,
+                   @Query("type") type: String,
                    @Query("pickup") pickUp: String): Observable<List<ListCarsResponse.Result>>
 
     /*

@@ -25,7 +25,7 @@ class CarDetail : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_car_detail)
         var progressDialog = ProgressDialog(this)
-        progressDialog.setMessage("Retraiving data")
+        progressDialog.setMessage("Getting data")
         progressDialog.setCancelable(false)
         progressDialog.show()
         val intent = intent
@@ -36,12 +36,14 @@ class CarDetail : AppCompatActivity() {
         val to = intent.getStringExtra("to")
 
         rent.setOnClickListener {
-            /*val intent: Intent = Intent(this, oauth::class.java)
-            startActivity(intent)*/
+            var requestCode = 0
+            val intent: Intent = Intent(this, oauth::class.java)
+            startActivityForResult(intent,requestCode)
 
+            /*
             val token = "LLego algo de firebase"
             val today = "today"
-            val deliverPlace = "aeropuerto"
+            val deliverPlace = "mde"
             var bookingRequest = BookingCarRequest.Request(token,id, today, pickup, from, deliverPlace,
                     to)
 
@@ -82,7 +84,7 @@ class CarDetail : AppCompatActivity() {
                                 }
                         )
             }
-        }
+            */}
 
 
         val rentyServe by lazy {
@@ -201,4 +203,8 @@ class CarDetail : AppCompatActivity() {
         return end
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
+        super.onActivityResult(requestCode, resultCode, data)
+        //Toast.makeText(this, data!!.getStringExtra("idToken"), Toast.LENGTH_LONG).show();
+    }
 }

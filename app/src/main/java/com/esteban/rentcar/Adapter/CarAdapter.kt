@@ -2,6 +2,8 @@ package com.esteban.rentcar.Adapter
 
 import android.content.Context
 import android.content.Intent
+
+
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -73,11 +75,15 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
         }
 
         holder.btn_rent_car.setOnClickListener {
-           /* val intent: Intent = Intent(holder.context,oauth::class.java)
-            holder.context.startActivity(intent)*/
+            val intent: Intent = Intent(holder.context,oauth::class.java)
+            holder.context.startActivity(intent)
+
+
+
+
             val token = "LLego algo de firebase"
             val today = "today"
-            val deliverPlace = "aeropuerto"
+            val deliverPlace = "mde"
             var bookingRequest = BookingCarRequest.Request(token,carList[position].id, today,
                     carList[position].pickup, carList[position].from, deliverPlace,
                     carList[position].to)
@@ -86,8 +92,8 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
                 rentCar(1,bookingRequest)
             } else if (carList[position].rental_id == rubyId) {
                 rentCar(2,bookingRequest)
-            }
-        }*/
+            }*/
+
 
     }
 
@@ -133,5 +139,4 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
 
 
 
-    //OnclickListener RecyclerView
 }

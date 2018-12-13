@@ -19,7 +19,7 @@
         android:paddingRight="20dp">
 
         <Spinner
-            android:id="@+id/pickup"
+            android:id="@+id/pick_up"
             style="@style/Widget.AppCompat.Spinner.Underlined"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
                 android:layout_height="match_parent"
                 android:autofillHints=""
                 android:inputType="date"
-                android:text="dd/mm/aaaa"
+                android:text="aaaa-mm-dd"
                 android:textColor="@color/colorAccent"
                 android:textSize="17sp"
                 android:textStyle="bold" />
