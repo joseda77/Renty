@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
 
             //Configuración del Spinner
-        var items_of_type = arrayOf("Económico", "Compacto", "SUV", "Lujo", "sport")
+        var items_of_type = arrayOf("Económico", "Compacto", "SUV", "Lujo")
             // Crear el ArrayAdapter para el spinner
         val adapter_spinner = ArrayAdapter(this, android.R.layout.simple_spinner_item, items_of_type)
             // Configura un diseño depslegable al adpater
@@ -97,8 +97,18 @@ class MainActivity : AppCompatActivity() {
                 typeCar = type.selectedItem.toString()
                 fromDate = txtDateFrom!!.text.toString()
                 toDate = txtDateTo!!.text.toString()
-                /*var list = getList()
-                my_recycler.adapter = CarAdapter(this,list)*/
+                var typeCode : Int = 0
+
+                if (typeCar == "Económico") {
+                    typeCode = 1
+                } else if (typeCar == "Compacto") {
+                    typeCode = 2
+                } else if (typeCar == "SUV") {
+                    typeCode = 3
+                } else if (typeCar == "Lujo") {
+                    typeCode = 4
+                }
+
                 val rentyServe by lazy {
                     IRentyApi.create("https://renty-web.herokuapp.com/")
                 }
@@ -112,7 +122,7 @@ class MainActivity : AppCompatActivity() {
                 progressDialog.setMessage("Getting cars")
                 progressDialog.setCancelable(false)
                 progressDialog.show()
-                disposable = rentyServe.getCarList(fromDate, toDate, typeCar, pickUp).subscribeOn(Schedulers.io())
+                disposable = rentyServe.getCarList(fromDate, toDate, typeCode, pickUp).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
                                 { response ->
@@ -134,7 +144,10 @@ class MainActivity : AppCompatActivity() {
                                 }
                         )
 
-                disposable = rentyServe.getCarList(fromDate, toDate, typeCar,pickUp).subscribeOn(Schedulers.io())
+
+
+
+                disposable = rentyServe2.getCarList(fromDate, toDate, typeCode,pickUp).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
                                 { response ->
