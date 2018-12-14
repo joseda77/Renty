@@ -239,7 +239,7 @@
                         android:layout_height="wrap_content"
                         android:accessibilityHeading="false"
                         android:backgroundTint="@color/colorPrimary"
-                        android:text="Cancelar reserva"
+                        android:text="Cancel Booking"
                         android:textColor="#ffffff"
                         android:textSize="10sp" />
 

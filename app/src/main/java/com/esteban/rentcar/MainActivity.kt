@@ -25,7 +25,6 @@ import kotlinx.android.synthetic.main.activity_coordinator_main.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlinx.coroutines.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -41,6 +40,7 @@ class MainActivity : AppCompatActivity() {
     var toDate: String = ""
     var pickUp: String = ""
     var typeCar: String = ""
+    var idToken = ""
 
 
 
@@ -49,9 +49,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_coordinator_main)
 
         fab.setOnClickListener { view ->
-            val intent:Intent = Intent(this, ShowBookings::class.java)
-            intent.putExtra("userId","564asd54as87d")
-            startActivity(intent)
+            idToken = oauth.getToken()
+
+            if(idToken == "") {
+                val requestCode = 0
+                val intent: Intent = Intent(this, oauth::class.java)
+                startActivityForResult(intent, requestCode)
+            } else {
+                val intent:Intent = Intent(this, ShowBookings::class.java)
+                intent.putExtra("userToken",idToken)
+                startActivity(intent)
+            }
         }
 
         //Instanciar los views en las variables
@@ -173,9 +181,11 @@ class MainActivity : AppCompatActivity() {
                                 Log.i("OOOOOOO","Tra eesti "+response.toString())
                                 //response.cars cuando los metodos retornen lo que deban
                                 for (car in response) {
-                                    listCar.add(Car(car.id, car.type, car.brand, car.model,
-                                            car.price.toString(), car.rental.id.toString(),
-                                            car.rental.name, car.thumbnail, pickUp, fromDate, toDate))
+                                    if(car.thumbnail != "") {
+                                        listCar.add(Car(car.id, car.type, car.brand, car.model,
+                                                car.price.toString(), car.rental.id.toString(),
+                                                car.rental.name, car.thumbnail, pickUp, fromDate, toDate))
+                                    }
                                 }
                                 refreshList()
                             }
@@ -194,22 +204,33 @@ class MainActivity : AppCompatActivity() {
                             { response ->
 
                                 for (car in response) {
-                                    listCar.add(Car(car.id, car.type, car.brand, car.model,
-                                            car.price.toString(), car.rental.id.toString(),
-                                            car.rental.name, car.thumbnail, pickUp, fromDate, toDate))
-
+                                    if(car.thumbnail != "") {
+                                        listCar.add(Car(car.id, car.type, car.brand, car.model,
+                                                car.price.toString(), car.rental.id.toString(),
+                                                car.rental.name, car.thumbnail, pickUp, fromDate, toDate))
+                                    }
                                 }
                                 refreshList()
                                 progressDialog.dismiss()
+                                if(listCar.size == 0) {
+                                    Toast.makeText(this,
+                                            "No se encuentran vehiculos disponibles para renta",
+                                            Toast.LENGTH_LONG).show()
+                                }
                             },
                             { error ->
                                 progressDialog.dismiss()
                                 Toast.makeText(this,
                                         "No se encuentran vehiculos con los parametros ingresados en Ruby",
                                         Toast.LENGTH_LONG).show()
+
+                                if(listCar.size == 0) {
+                                    Toast.makeText(this,
+                                            "No se encuentran vehiculos disponibles para renta",
+                                            Toast.LENGTH_LONG).show()
+                                }
                             }
                     )
-            //listCar = getList()
             closeKeyBoard()
             //ocultar panel
             values_container.visibility = View.GONE
@@ -240,23 +261,6 @@ class MainActivity : AppCompatActivity() {
         my_recycler.adapter = null
         my_recycler.adapter = CarAdapter(this, listCar)
     }
-
-    /*fun getList(): ArrayList<Car> {
-        var list = ArrayList<Car>()
-
-        list.add(Car(2, "Type","Brand ", "model ", "price ",
-                "rental_id 2","rental_name", "https://i.imgur.com/IyEp7mf.jpg"))
-        list.add(Car(3, "Type","Brand ", "model ", "price ",
-                "rental_id 3","rental_name", "https://i.imgur.com/XEgyzCW.jpg"))
-        list.add(Car(4, "Type","Brand ", "model ", "price ",
-                "rental_id 4","rental_name", "https://i.imgur.com/72bQoTW.jpg"))
-        list.add(Car(5, "Type","Brand ", "model ", "price ",
-                "rental_id 5","rental_name", "https://i.imgur.com/fbPHUCn.jpg"))
-        list.add(Car(6, "Type","Brand ", "model ", "price ",
-                "rental_id 1","rental_name", "https://i.imgur.com/1wrP717.jpg"))
-
-        return list
-    }*/
 
     private fun closeKeyBoard() {
         var view = this.currentFocus

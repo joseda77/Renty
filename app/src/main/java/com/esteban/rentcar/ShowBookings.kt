@@ -17,20 +17,25 @@ class ShowBookings : AppCompatActivity() {
         setContentView(R.layout.activity_show_bookings)
 
        var progressDialog = ProgressDialog(this)
-        progressDialog.setMessage("Retraiving data")
+        progressDialog.setMessage("Getting Bookings")
         progressDialog.setCancelable(false)
         progressDialog.show()
+        progressDialog.dismiss()
         val intent = intent
-        val id = intent.getStringExtra("userId")
-        Toast.makeText(this, "Este es el id de usuario " + id, Toast.LENGTH_LONG).show()
+        val idToken = intent.getStringExtra("userToken")
+        Toast.makeText(this, idToken, Toast.LENGTH_LONG).show()
 
         /*cancel.setOnClickListener {
             val intent: Intent = Intent(this, oauth::class.java)
             startActivity(intent)
         }*/
 
-        val rentyServe by lazy {
+        /*val rentyServe by lazy {
             IRentyApi.create("https://renty-web.herokuapp.com/")
+        }
+
+        val rentyServe2 by lazy {
+            IRentyApi.create("https://renty-ruby.herokuapp.com/")
         }
 
         /*disposable = rentyServe.getBookingCars(token).subscribeOn(Schedulers.io())
@@ -52,6 +57,6 @@ class ShowBookings : AppCompatActivity() {
                                     Toast.LENGTH_LONG).show()
                         }
                 )*/
-
+*/
     }
 }
