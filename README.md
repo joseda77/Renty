@@ -1,5 +1,5 @@
 # Renty APP Movil
-_Esta es una aplicación movil, desarrollada en Android Studio usando Kotlin._
+_Esta es una aplicación movil, desarrollada en Android Studio usando Kotlin, con un API level 28._
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d5cde30b676141fb8b45e2b62a79f4f4)](https://www.codacy.com/app/jaidiber1/Renty?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=joseda77/Renty&amp;utm_campaign=Badge_Grade)
 
