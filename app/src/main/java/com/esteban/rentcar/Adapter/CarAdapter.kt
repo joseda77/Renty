@@ -98,7 +98,8 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
                 IRentyApi.create("https://renty-web.herokuapp.com/")
             }
 
-            disposable = rentyServe.bookingCar(request).subscribeOn(Schedulers.io())
+            disposable = rentyServe.bookingCar(request.token,request.carId, request.bookingDate, request.pickup,
+                    request.pickupDate, request.deliverPlace, request.deliverDate).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             { response ->
@@ -116,7 +117,8 @@ class CarAdapter (internal var context: Context, internal var carList: ArrayList
                 IRentyApi.create("https://renty-ruby.herokuapp.com/")
             }
 
-            disposable = rentyServe2.bookingCar(request).subscribeOn(Schedulers.io())
+            disposable = rentyServe2.bookingCar(request.token,request.carId, request.bookingDate, request.pickup,
+                    request.pickupDate, request.deliverPlace, request.deliverDate).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             { response ->

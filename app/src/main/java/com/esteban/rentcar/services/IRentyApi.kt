@@ -26,8 +26,18 @@ interface IRentyApi {
 
 
     //Para reservar es desde aquí
+    @FormUrlEncoded
     @POST("booking")
-    fun bookingCar(@Body request: BookingCarRequest.Request): Observable<BookingCarResponse.Result>
+    fun bookingCar(@Field("token") token: String,
+                   @Field("carId") carId: Int,
+                   @Field("bookingDate") bookingDate: String,
+                   @Field("pickup") pickUp: String,
+                   @Field("pickupDate") pickupDate: String,
+                   @Field("deliverPlace") deliverPlace: String,
+                   @Field("deliverDate") deliverDate: String): Observable<BookingCarResponse.Result>
+
+    @POST("booking")
+    fun bookingCar2(@Body request: BookingCarRequest.Request): Observable<BookingCarResponse.Result>
 
     @GET("booking/{token}")
     fun getBookingCars(@Path("token") token: String) : Observable<List<UserCarsResponse.Result>>

@@ -8,6 +8,8 @@ import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.*
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_oauth.*
 
 class oauth : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener {
@@ -15,6 +17,7 @@ class oauth : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener {
 
     private var mGoogleSignInClient: GoogleSignInClient? = null
     private val RC_SIGN_IN = 9001
+    private var mAuth: FirebaseAuth? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_oauth)
@@ -31,6 +34,7 @@ class oauth : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener {
         sign_in_button.setOnClickListener{
             signIn()
         }
+        mAuth = FirebaseAuth.getInstance()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -55,12 +59,22 @@ class oauth : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener {
             val account : GoogleSignInAccount? = result.signInAccount
             Toast.makeText(this, "Sesión iniciada", Toast.LENGTH_SHORT).show();
             var intent:Intent = getIntent() //Intent mediante el que se llamó la actividad oauth
-            idToken = account!!.idToken!!
             intent.putExtra("idToken",account!!.idToken)
-            setResult(0,intent)
-            finish()
+            val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+            mAuth!!.signInWithCredential(credential).addOnCompleteListener(this) 
+            {
+                task ->
+                if(task.isSuccessful) {
+                    idToken = account!!.idToken!!
+                    setResult(0,intent)
+                    finish()
+                } else {
+                    Toast.makeText(this,"Error al guardar la cuenta", Toast.LENGTH_LONG).show()
+                }
+            }
+
         } else {
-            Toast.makeText(this,"Error al iniciar sesión", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Error al iniciar sesión", Toast.LENGTH_LONG).show()
         }
     }
 

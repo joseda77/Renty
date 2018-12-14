@@ -28,7 +28,7 @@ object BookingCarResponse {
 }
 
 object UserCarsResponse {
-    data class Result(val bookingID: String, val uid: String, val car: ListCarsResponse.Result,
+    data class Result(val bookingID: String, val uid: String, val car: DetailCarResponse.Result,
                       val bookingDate: String, val pickup: String, val pickupDate: String,
                       val deliverPlace: String, val deliverDate: String, val rental: DetailCarResponse.Rental)
 }

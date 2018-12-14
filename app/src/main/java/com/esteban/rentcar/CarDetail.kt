@@ -56,9 +56,13 @@ class CarDetail : AppCompatActivity() {
                 //Rentar en python
                 if (rentalID == pythonId) {
                     val rentyServe by lazy {
-                        IRentyApi.create("https://renty-web.herokuapp.com/")
+                        IRentyApi.create("https://renty-web-dev.herokuapp.com/")
                     }
-                    disposable = rentyServe.bookingCar(bookingRequest).subscribeOn(Schedulers.io())
+
+                    Log.i("miiiiiiiiierda", bookingRequest.toString())
+                    //disposable = rentyServe.bookingCar(idToken, idCar, today, pickup, from, deliverPlace, to)
+                    disposable = rentyServe.bookingCar2(bookingRequest)
+                            .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(
                                     { response ->
@@ -84,7 +88,8 @@ class CarDetail : AppCompatActivity() {
                         IRentyApi.create("https://renty-ruby.herokuapp.com/")
                     }
 
-                    disposable = rentyServe2.bookingCar(bookingRequest).subscribeOn(Schedulers.io())
+                    disposable = rentyServe2.bookingCar(idToken, idCar, today, pickup, from, deliverPlace, to)
+                            .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(
                                     { response ->
