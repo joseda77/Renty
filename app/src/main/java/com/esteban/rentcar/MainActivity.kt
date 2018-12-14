@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         // Configura un diseño depslegable al adpater
         adapter_pick_up.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         // Enlazar el adaper creado con el spinner del view
-        pick_up!!.setAdapter(adapter_pick_up)
+        pick_up?.setAdapter(adapter_pick_up)
             //Configuración del Spinner
         var items_of_type = arrayOf("Económico", "Compacto", "SUV", "Lujo")
         // Crear el ArrayAdapter para el spinner
@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         // Configura un diseño depslegable al adpater
         adapter_spinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         // Enlazar el adaper creado con el spinner del view
-        type!!.setAdapter(adapter_spinner)
+        type?.setAdapter(adapter_spinner)
 
 
 
@@ -105,14 +105,14 @@ class MainActivity : AppCompatActivity() {
         updateDateInView()
 
         // Evento -> Click en calendarios, Mostrar DatePickerDialog que es configurado con OnDateSetListener
-        txtDateFrom!!.setOnClickListener(object : View.OnClickListener {
+        txtDateFrom?.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
                 btnDateCurrent = 1
                 DatePickerDialog(this@MainActivity, dataSetListener, calendar.get(Calendar.YEAR),
                         calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
             }
         })
-        txtDateTo!!.setOnClickListener(object : View.OnClickListener {
+        txtDateTo?.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
                 btnDateCurrent = 2
                 DatePickerDialog(this@MainActivity, dataSetListener, calendar.get(Calendar.YEAR),
@@ -124,8 +124,8 @@ class MainActivity : AppCompatActivity() {
         search_button.setOnClickListener {
             pickUp = pick_up.selectedItem.toString()
             typeCar = type.selectedItem.toString()
-            fromDate = txtDateFrom!!.text.toString()
-            toDate = txtDateTo!!.text.toString()
+            fromDate = txtDateFrom?.text.toString()
+            toDate = txtDateTo?.text.toString()
             var typeCode: String = ""
 
             if (typeCar == "Económico") typeCode = "1"
@@ -272,9 +272,9 @@ class MainActivity : AppCompatActivity() {
         val myFormat = "yyyy-MM-dd" // mention the format you need
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         if (btnDateCurrent == 1) {
-            txtDateFrom!!.text = sdf.format(calendar.getTime())
+            txtDateFrom?.text = sdf.format(calendar.getTime())
         } else if (btnDateCurrent == 2) {
-            txtDateTo!!.text = sdf.format(calendar.getTime())
+            txtDateTo?.text = sdf.format(calendar.getTime())
         }
 
     }
