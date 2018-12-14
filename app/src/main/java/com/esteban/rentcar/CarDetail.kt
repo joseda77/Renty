@@ -37,8 +37,12 @@ class CarDetail : AppCompatActivity() {
 
         rent.setOnClickListener {
             var requestCode = 0
-            val intent: Intent = Intent(this, oauth::class.java)
-            startActivityForResult(intent,requestCode)
+            var id = oauth.getToken()
+            var intent: Intent
+            if(id.equals("")){
+                intent = Intent(this, oauth::class.java)
+                startActivityForResult(intent,requestCode)
+            }
 
             /*
             val token = "LLego algo de firebase"

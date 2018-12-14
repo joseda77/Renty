@@ -1,6 +1,7 @@
 package com.esteban.rentcar
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -16,12 +17,17 @@ class ShowBookings : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_bookings)
 
-       var progressDialog = ProgressDialog(this)
+       /*var progressDialog = ProgressDialog(this)
         progressDialog.setMessage("Retraiving data")
         progressDialog.setCancelable(false)
-        progressDialog.show()
-        val intent = intent
-        val id = intent.getStringExtra("userId")
+        progressDialog.show()*/
+        var id = oauth.getToken()
+        var intent: Intent
+        if(id.equals("")){
+            intent = Intent(this, oauth::class.java)
+            startActivity(intent)
+            return
+        }
         Toast.makeText(this, "Este es el id de usuario " + id, Toast.LENGTH_LONG).show()
 
         /*cancel.setOnClickListener {

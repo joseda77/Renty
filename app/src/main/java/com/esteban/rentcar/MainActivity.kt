@@ -50,7 +50,6 @@ class MainActivity : AppCompatActivity() {
 
         fab.setOnClickListener { view ->
             val intent:Intent = Intent(this, ShowBookings::class.java)
-            intent.putExtra("userId","564asd54as87d")
             startActivity(intent)
         }
 
